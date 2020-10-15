@@ -9,6 +9,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+    - name: "Setup SSH key"
+      run: |
+        mkdir -p -m 0700 ~/.ssh
+        echo "StrictHostKeyChecking no" >> ~/.ssh/config
+        echo "IdentityFile ~/.ssh/id_ed25519" >> ~/.ssh/config
+        echo "UserKnownHostsFile /dev/null" >> ~/.ssh/config
+        printenv SSH_KEY >> ~/.ssh/id_ed25519
+        chmod 0600 ~/.ssh/id_ed25519
+      env:
+        SSH_KEY: '${{ secrets.SSH_KEY }}'
     - uses: cachix/install-nix-action@v11
       with:
         nix_path: nixpkgs=channel:nixos-20.03
