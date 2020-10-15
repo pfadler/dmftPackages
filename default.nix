@@ -2,12 +2,22 @@
 
 with pkgs;
 
-recurseIntoAttrs {
+let
 
-  alpsPackages = callPackage ./alps { };
+  dmftPackages = recurseIntoAttrs (let
 
-  nfft = callPackage ./nfft { };
+    callPackage = newScope dmftPackages;
 
-  triqsPackages = callPackage ./triqs { };
+  in {
 
-}
+    alpsPackages = callPackage ./alps { };
+
+    nfft = callPackage ./nfft { };
+
+    triqsPackages = callPackage ./triqs { };
+
+    w2dynamics = callPackage ./w2dynamics { };
+
+  });
+
+in dmftPackages
