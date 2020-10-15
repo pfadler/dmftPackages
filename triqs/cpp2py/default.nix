@@ -1,12 +1,12 @@
 { stdenv, fetchFromGitHub, cmake, python3Packages, llvmPackages, python3 }:
 
 stdenv.mkDerivation rec {
-  name = "cpp2py";
+  pname = "cpp2py";
   version = "2.0.0";
 
   src = fetchFromGitHub {
     owner = "TRIQS";
-    repo = name;
+    repo = pname;
     rev = version;
     sha256 = "sha256:1byl6rvb48whkwblalhiaypgccl9m9yijx8rwr9dfbffl97zcsdv";
   };

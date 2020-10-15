@@ -2,12 +2,12 @@
 , gmp, h5, itertools, mpi, ncurses, openblas }:
 
 stdenv.mkDerivation rec {
-  name = "triqs";
+  pname = "triqs";
   version = "3.0.0";
 
   src = fetchFromGitHub {
     owner = "TRIQS";
-    repo = name;
+    repo = pname;
     rev = version;
     sha256 = "sha256:0gf5j4agslcyqrbyp9vwp88mpf2jpv0smmjh0b6jrwn54v8jpw08";
   };
