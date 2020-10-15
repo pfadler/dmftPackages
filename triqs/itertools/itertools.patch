@@ -1,0 +1,32 @@
+diff --git a/deps/CMakeLists.txt b/deps/CMakeLists.txt
+index 541e730..2f759ba 100644
+--- a/deps/CMakeLists.txt
++++ b/deps/CMakeLists.txt
+@@ -53,7 +53,6 @@ if(Build_Documentation)
+     GIT_REPO https://github.com/TRIQS/cpp2py
+     VERSION 2.0
+     GIT_TAG master
+-    BUILD_ALWAYS
+     EXCLUDE_FROM_ALL
+   )
+ endif()
+@@ -62,6 +61,5 @@ endif()
+ external_dependency(GTest
+   GIT_REPO https://github.com/google/googletest
+   GIT_TAG release-1.10.0
+-  BUILD_ALWAYS
+   EXCLUDE_FROM_ALL
+ )
+diff --git a/test/c++/CMakeLists.txt b/test/c++/CMakeLists.txt
+index 36466c3..33aa747 100644
+--- a/test/c++/CMakeLists.txt
++++ b/test/c++/CMakeLists.txt
+@@ -11,7 +11,7 @@ foreach(test ${all_tests})
+   get_filename_component(test_name ${test} NAME_WE)
+   get_filename_component(test_dir ${test} DIRECTORY)
+   add_executable(${test_name} ${test})
+-  target_link_libraries(${test_name} ${PROJECT_NAME}::${PROJECT_NAME}_c ${PROJECT_NAME}_warnings gtest_main)
++  target_link_libraries(${test_name} ${PROJECT_NAME}::${PROJECT_NAME}_c ${PROJECT_NAME}_warnings gtest gtest_main)
+   set_property(TARGET ${test_name} PROPERTY RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/${test_dir})
+   add_test(NAME ${test_name} COMMAND ${test_name} WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/${test_dir})
+   # Run clang-tidy if found
