@@ -13,7 +13,7 @@ stdenv.mkDerivation rec {
 
   nativeBuildInputs = [ cmake python3Packages.wrapPython ];
   buildInputs = [ llvmPackages.libclang python3 ];
-  pythonPath = with python3Packages; [ Mako numpy scipy ];
+  pythonPath = with python3Packages; [ h5py Mako numpy scipy ];
   propagatedBuildInputs = pythonPath;
   postFixup = "wrapPythonPrograms";
 }

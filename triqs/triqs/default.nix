@@ -15,7 +15,7 @@ stdenv.mkDerivation rec {
   patches = [ ./triqs.patch ];
   nativeBuildInputs = [ cmake gtest python3Packages.wrapPython ];
   buildInputs = [ boost cpp2py fftw gmp itertools mpi ncurses openblas ];
-  pythonPath = with python3Packages; [ mpi4py ];
+  pythonPath = with python3Packages; [ numpy matplotlib mpi4py Mako scipy ];
   propagatedBuildInputs = [ h5 ] ++ pythonPath;
   postFixup = "wrapPythonPrograms";
 }
