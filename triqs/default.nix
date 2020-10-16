@@ -1,4 +1,4 @@
-{ newScope, recurseIntoAttrs }:
+{ newScope, recurseIntoAttrs, nfft }:
 
 let
 
@@ -9,6 +9,8 @@ let
   in {
 
     cpp2py = callPackage ./cpp2py { };
+
+    cthyb = callPackage ./cthyb { inherit nfft; };
 
     h5 = callPackage ./h5 { };
 
