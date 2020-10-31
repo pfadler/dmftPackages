@@ -1,20 +1,11 @@
-{ pkgs ? import <nixpkgs> { } }:
-
-with pkgs;
-
-let
-
-  newScope = extra: lib.callPackageWith (pkgs // extra);
-
-in lib.makeScope newScope (self:
-  with self; {
-
-    alpsPackages = callPackage ./alpsPackages { };
-
-    nfft = callPackage ./nfft { };
-
-    triqsPackages = callPackage ./triqsPackages { };
-
-    w2dynamics = callPackage ./w2dynamics { };
-
-  })
+{ pkgs ? (import (
+    let
+      lock = builtins.fromJSON (builtins.readFile ./flake.lock);
+    in
+    with lock.nodes.nixpkgs.locked; fetchTarball {
+      url = "https://github.com/${owner}/${repo}/archive/${rev}.tar.gz";
+      sha256 = narHash;
+    }
+  ) {})
+}:
+(import ./overlay.nix null pkgs).dmftPackages

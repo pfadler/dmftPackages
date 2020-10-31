@@ -15,7 +15,7 @@ stdenv.mkDerivation rec {
   version = "git-${builtins.substring 0 7 rev}";
 
   src = builtins.fetchGit {
-    url = "git@git.physik.uni-wuerzburg.de:hmenke/w2dynamics.git";
+    url = "git+ssh://git@git.physik.uni-wuerzburg.de/hmenke/w2dynamics.git";
     inherit rev;
   };
 
