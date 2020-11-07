@@ -1,12 +1,13 @@
-{ stdenv, cmake, gfortran, openblas, fftw, nfft, python3, python3Packages }:
+{ stdenv, cmake, gfortran, blas-reference, lapack-reference, fftw, nfft, python3
+, python3Packages }:
 
 stdenv.mkDerivation rec {
   pname = "w2dynamics";
   version = "git";
 
   src = builtins.fetchGit {
-    url = "git@git.physik.uni-wuerzburg.de:w2dynamics/w2dynamics.git";
-    rev = "fef092443f4f84294209931b5b0a6a6a903f0a77";
+    url = "git@git.physik.uni-wuerzburg.de:hmenke/w2dynamics.git";
+    rev = "84a86f04d2d896b21e5c7c91f7b394aff6c3a4e8";
   };
 
   nativeBuildInputs = [ cmake python3Packages.wrapPython ];
@@ -15,7 +16,7 @@ stdenv.mkDerivation rec {
 
   enableParallelBuilding = false;
 
-  buildInputs = [ gfortran openblas fftw nfft ];
+  buildInputs = [ gfortran blas-reference lapack-reference fftw nfft ];
 
   pythonPath = with python3Packages; [ numpy scipy h5py mpi4py configobj ];
   propagatedBuildInputs = pythonPath;
