@@ -4,20 +4,16 @@ with pkgs;
 
 let
 
-  dmftPackages = recurseIntoAttrs (let
+  newScope = extra: lib.callPackageWith (pkgs // extra);
 
-    callPackage = newScope dmftPackages;
+in lib.makeScope newScope (self: with self; {
 
-  in {
+  alpsPackages = callPackage ./alps { };
 
-    alpsPackages = callPackage ./alps { };
+  nfft = callPackage ./nfft { };
 
-    nfft = callPackage ./nfft { };
+  triqsPackages = callPackage ./triqs { };
 
-    triqsPackages = callPackage ./triqs { };
+  w2dynamics = callPackage ./w2dynamics { };
 
-    w2dynamics = callPackage ./w2dynamics { };
-
-  });
-
-in dmftPackages
+})

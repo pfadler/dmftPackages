@@ -1,17 +1,9 @@
-{ newScope, recurseIntoAttrs }:
+{ lib, newScope, recurseIntoAttrs }:
 
-let
+lib.makeScope newScope (self: with self; recurseIntoAttrs {
 
-  alpsPackages = recurseIntoAttrs (let
+  alpsCore = callPackage ./alpsCore { };
 
-    callPackage = newScope alpsPackages;
+  maxent = callPackage ./maxent { };
 
-  in {
-
-    alpsCore = callPackage ./alpsCore { };
-
-    maxent = callPackage ./maxent { };
-
-  });
-
-in alpsPackages
+})

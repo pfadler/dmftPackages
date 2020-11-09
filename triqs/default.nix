@@ -1,25 +1,17 @@
-{ newScope, recurseIntoAttrs, nfft }:
+{ lib, newScope, recurseIntoAttrs, nfft }:
 
-let
+lib.makeScope newScope (self: with self; recurseIntoAttrs {
 
-  triqsPackages = recurseIntoAttrs (let
+  cpp2py = callPackage ./cpp2py { };
 
-    callPackage = newScope triqsPackages;
+  cthyb = callPackage ./cthyb { inherit nfft; };
 
-  in {
+  h5 = callPackage ./h5 { };
 
-    cpp2py = callPackage ./cpp2py { };
+  itertools = callPackage ./itertools { };
 
-    cthyb = callPackage ./cthyb { inherit nfft; };
+  mpi = callPackage ./mpi { };
 
-    h5 = callPackage ./h5 { };
+  triqs = callPackage ./triqs { };
 
-    itertools = callPackage ./itertools { };
-
-    mpi = callPackage ./mpi { };
-
-    triqs = callPackage ./triqs { };
-
-  });
-
-in triqsPackages
+})
