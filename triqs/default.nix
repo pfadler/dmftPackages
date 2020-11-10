@@ -1,4 +1,4 @@
-{ lib, newScope, recurseIntoAttrs, nfft }:
+{ lib, newScope, recurseIntoAttrs, nfft, python3Packages }:
 
 lib.makeScope newScope (self: with self; recurseIntoAttrs {
 
@@ -13,5 +13,7 @@ lib.makeScope newScope (self: with self; recurseIntoAttrs {
   mpi = callPackage ./mpi { };
 
   triqs = callPackage ./triqs { };
+
+  pyed = python3Packages.callPackage ./pyed { inherit triqs; };
 
 })

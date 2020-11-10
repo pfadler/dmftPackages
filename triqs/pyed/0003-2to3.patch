@@ -1,0 +1,435 @@
+From b7143d73ea6978690ad4c08e36465310727b3c40 Mon Sep 17 00:00:00 2001
+From: Henri Menke <henri@henrimenke.de>
+Date: Tue, 10 Nov 2020 15:13:43 +0100
+Subject: [PATCH 3/3] 2to3
+
+$ 2to3 -w ./
+---
+ benchmark/hubbard_atom_two_bathsites/plot.py |  2 +-
+ benchmark/spinless/calc.py                   |  2 +-
+ pyed/CubeTetras.py                           | 10 ++---
+ pyed/OperatorUtils.py                        | 10 ++---
+ pyed/ParameterCollection.py                  | 14 +++----
+ pyed/SparseExactDiagonalization.py           | 10 ++---
+ pyed/SparseMatrixFockStates.py               |  4 +-
+ pyed/SquareTriangles.py                      | 10 ++---
+ pyed/TriqsExactDiagonalization.py            |  2 +-
+ pyed/tests/test_operator_utils.py            | 40 ++++++++++----------
+ 10 files changed, 52 insertions(+), 52 deletions(-)
+
+diff --git a/benchmark/hubbard_atom_two_bathsites/plot.py b/benchmark/hubbard_atom_two_bathsites/plot.py
+index abae6e8..5c2dbdd 100644
+--- a/benchmark/hubbard_atom_two_bathsites/plot.py
++++ b/benchmark/hubbard_atom_two_bathsites/plot.py
+@@ -93,7 +93,7 @@ if __name__ == '__main__':
+     subp = [1, 3, 1]
+     
+     # -- All slice planes
+-    for i1, i2 in itertools.combinations(range(3), 2):
++    for i1, i2 in itertools.combinations(list(range(3)), 2):
+ 
+         frac_cut = 3
+         cut_idx = int(np.round(1./frac_cut * g4_tau.data.shape[0]))
+diff --git a/benchmark/spinless/calc.py b/benchmark/spinless/calc.py
+index d036e77..e5c9ea4 100644
+--- a/benchmark/spinless/calc.py
++++ b/benchmark/spinless/calc.py
+@@ -73,7 +73,7 @@ if __name__ == '__main__':
+                      indices=['A', 'B'])
+ 
+     for (i1, s1), (i2, s2) in itertools.product([('A', up), ('B', do)], repeat=2):
+-        print i1, s1, i2, s2
++        print(i1, s1, i2, s2)
+         ed.set_g2_tau(g_tau[i1, i2], c(s1,0), c_dag(s2,0))
+ 
+     # ------------------------------------------------------------------
+diff --git a/pyed/CubeTetras.py b/pyed/CubeTetras.py
+index 446c1c0..ff7468f 100644
+--- a/pyed/CubeTetras.py
++++ b/pyed/CubeTetras.py
+@@ -84,13 +84,13 @@ class CubeTetras(CubeTetrasBase):
+     # ------------------------------------------------------------------
+     def __iter__(self):
+ 
+-        for tidx in xrange(6):
++        for tidx in range(6):
+             
+             func, perm, perm_sign = self.tetra_list[tidx]
+     
+             index = []
+             for n1, n2, n3 in itertools.product(
+-                    range(self.ntau), repeat=3):
++                    list(range(self.ntau)), repeat=3):
+                 if func(n1, n2, n3): index.append((n1, n2, n3))
+ 
+             index = np.array(index).T
+@@ -122,8 +122,8 @@ class CubeTetrasMesh(CubeTetrasBase):
+ 
+         """ for triqs three time greens functions """
+ 
+-        tetra_idx = [ [] for n in xrange(6) ]
+-        tetra_tau = [ [] for n in xrange(6) ]
++        tetra_idx = [ [] for n in range(6) ]
++        tetra_tau = [ [] for n in range(6) ]
+ 
+         for idxs, taus in enumerate_tau3(self.g4_tau):
+             
+@@ -135,7 +135,7 @@ class CubeTetrasMesh(CubeTetrasBase):
+                     tetra_tau[tidx] += [ taus ]
+                     break
+ 
+-        for tidx in xrange(6):
++        for tidx in range(6):
+             func, perm, perm_sign = self.tetra_list[tidx]
+ 
+             yield tetra_idx[tidx], tetra_tau[tidx], perm, perm_sign
+diff --git a/pyed/OperatorUtils.py b/pyed/OperatorUtils.py
+index 75c66ff..0bea9ae 100644
+--- a/pyed/OperatorUtils.py
++++ b/pyed/OperatorUtils.py
+@@ -128,7 +128,7 @@ def quartic_pauli_symmetrize(U):
+     N = U.shape[0]
+     assert( U.shape == tuple([N]*4) )
+ 
+-    for n in xrange(N):
++    for n in range(N):
+         U[n, n, :, :] = 0
+         U[:, :, n, n] = 0
+ 
+@@ -179,7 +179,7 @@ def quartic_tensor_from_operator(op, fundamental_operators,
+         op_list, prefactor = term
+         if len(op_list) == 4:
+ 
+-            d, t = zip(*op_list) # split in two lists with daggers and tuples resp
++            d, t = list(zip(*op_list)) # split in two lists with daggers and tuples resp
+             t = [tuple(x) for x in t]
+ 
+             # check creation/annihilation order
+@@ -217,7 +217,7 @@ def operator_from_quartic_tensor(h_quart, fundamental_operators):
+     H = Operator(0.)
+ 
+     for t in itertools.product(enumerate(fundamental_operators), repeat=4):
+-        idx, ops = zip(*t)
++        idx, ops = list(zip(*t))
+         o1, o2, o3, o4 = ops
+         o1, o2 = dagger(o1), dagger(o2)
+ 
+@@ -246,7 +246,7 @@ def operator_single_particle_transform(op, U, fundamental_operators):
+         k = op_idx_map.index((s, i))
+         
+         ret = Operator()
+-        for l in xrange(U.shape[0]):
++        for l in range(U.shape[0]):
+             op_idx = op_idx_map[l]
+             ret += U[k, l] * c(*op_idx)
+ 
+@@ -271,7 +271,7 @@ def operator_single_particle_transform(op, U, fundamental_operators):
+             if type(factor) is list:
+                 for dag, idxs in factor:
+                     tup = (dag, tuple(idxs))
+-                    if tup in op_trans_dict.keys():
++                    if tup in list(op_trans_dict.keys()):
+                         op_factor *= op_trans_dict[tup]
+                     else:
+                         op_factor *= {False:c, True:c_dag}[dag](*idxs)
+diff --git a/pyed/ParameterCollection.py b/pyed/ParameterCollection.py
+index 491a9bc..51ed00e 100644
+--- a/pyed/ParameterCollection.py
++++ b/pyed/ParameterCollection.py
+@@ -28,10 +28,10 @@ class ParameterCollection(object):
+         self.__dict__.update(kwargs)
+ 
+     def items(self):
+-        return self.__dict__.items()
++        return list(self.__dict__.items())
+ 
+     def keys(self):
+-   	return self.__dict__.keys()
++   	return list(self.__dict__.keys())
+ 
+     def dict(self):
+         return self.__dict__
+@@ -46,7 +46,7 @@ class ParameterCollection(object):
+         """ Fix for bug in Triqs that cast bool to numpy.bool_ 
+         here we cast all numpy.bools_ to plain python bools """
+         
+-        for key, value in self.items():
++        for key, value in list(self.items()):
+             if type(value) == np.bool_:
+                 self.dict()[key] = bool(value)
+ 
+@@ -57,7 +57,7 @@ class ParameterCollection(object):
+ 
+         d = self.dict()[dict_key]
+         d_fix = {}
+-        for key, value in d.items():
++        for key, value in list(d.items()):
+             d_fix[eval(key)] = value            
+         self.dict()[dict_key] = d_fix
+     
+@@ -75,7 +75,7 @@ class ParameterCollection(object):
+ 
+     def __str__(self):
+         out = ''
+-        keys = np.sort(self.__dict__.keys()) # sort keys
++        keys = np.sort(list(self.__dict__.keys())) # sort keys
+         for key in keys:
+             value = self.__dict__[key]
+             if type(value) is ParameterCollection:
+@@ -97,8 +97,8 @@ class ParameterCollection(object):
+     def get_my_name(self):
+         ans = []
+         frame = inspect.currentframe().f_back
+-        tmp = dict(frame.f_globals.items() + frame.f_locals.items())
+-        for k, var in tmp.items():
++        tmp = dict(list(frame.f_globals.items()) + list(frame.f_locals.items()))
++        for k, var in list(tmp.items()):
+             if isinstance(var, self.__class__):
+                 if hash(self) == hash(var):
+                     ans.append(k)
+diff --git a/pyed/SparseExactDiagonalization.py b/pyed/SparseExactDiagonalization.py
+index 6a5b4f0..8037a06 100644
+--- a/pyed/SparseExactDiagonalization.py
++++ b/pyed/SparseExactDiagonalization.py
+@@ -19,7 +19,7 @@ from scipy.sparse.linalg import eigsh as eigsh_sparse
+ 
+ # ----------------------------------------------------------------------
+ 
+-from CubeTetras import CubeTetras
++from .CubeTetras import CubeTetras
+ 
+ # ----------------------------------------------------------------------
+ class SparseExactDiagonalization(object):
+@@ -59,7 +59,7 @@ class SparseExactDiagonalization(object):
+                 self.E, self.U = eigsh_sparse(
+                     self.H, k=self.nstates, which='SA',
+                     v0=self.v0, tol=self.tol, ncv=self.nstates*8+1)
+-                print 'ED:', time.time() - t, ' s'
++                print('ED:', time.time() - t, ' s')
+             else:
+                 self.E, self.U = eigs_sparse(
+                     self.H, k=self.nstates, which='SR',
+@@ -95,7 +95,7 @@ class SparseExactDiagonalization(object):
+     def get_expectation_value_sparse(self, operator):
+ 
+         exp_val = 0.0
+-        for idx in xrange(self.E.size):
++        for idx in range(self.E.size):
+             vec = self.U[:, idx]
+             dot_prod = np.dot(vec.H, operator * vec)[0,0] # <n|O|n>
+             exp_val += np.exp(-self.beta * self.E[idx]) * dot_prod
+@@ -208,7 +208,7 @@ class SparseExactDiagonalization(object):
+         for tidx, tetra in enumerate(CubeTetras(tau)):
+             idx, taus, perm, perm_sign = tetra
+ 
+-            print 'Tetra:', tidx
++            print('Tetra:', tidx)
+             
+             # do not permute the last operator
+             ops_perm = ops[perm + [3]]
+@@ -400,7 +400,7 @@ class SparseExactDiagonalization(object):
+         ba, bc = op1, op2
+ 
+         Hba = ba
+-        for order in xrange(Norder):
++        for order in range(Norder):
+             tail_op = xi_commutator(Hba, bc, xi)                
+             Gc[order] = (-1.)**(order) * \
+                         self.get_expectation_value(tail_op)
+diff --git a/pyed/SparseMatrixFockStates.py b/pyed/SparseMatrixFockStates.py
+index 6a4dbb8..231d5b7 100644
+--- a/pyed/SparseMatrixFockStates.py
++++ b/pyed/SparseMatrixFockStates.py
+@@ -86,7 +86,7 @@ class SparseMatrixRepresentation(object):
+         from sympy.simplify.simplify import nsimplify
+         
+         d = dict([ ((i, j), nsimplify(val)) \
+-                   for (i, j), val in Hsp.todok().iteritems() ])
++                   for (i, j), val in Hsp.todok().items() ])
+         
+         H = SparseMatrix(Hsp.shape[0], Hsp.shape[1], d)
+ 
+@@ -105,7 +105,7 @@ class SparseMatrixCreationOperators:
+         self.nstates = 2**nfermions
+ 
+         self.c_dag = []
+-        for fidx in xrange(nfermions):
++        for fidx in range(nfermions):
+             c_dag_fidx = self._build_creation_operator(fidx)
+             self.c_dag.append(c_dag_fidx)
+ 
+diff --git a/pyed/SquareTriangles.py b/pyed/SquareTriangles.py
+index bfe48fc..b38d621 100644
+--- a/pyed/SquareTriangles.py
++++ b/pyed/SquareTriangles.py
+@@ -74,13 +74,13 @@ class SuqareTraingles(SquareTrianglesBase):
+     # ------------------------------------------------------------------
+     def __iter__(self):
+ 
+-        for tidx in xrange(self.N):
++        for tidx in range(self.N):
+             
+             func, perm, perm_sign = self.triangle_list[tidx]
+     
+             index = []
+             for n1, n2 in itertools.product(
+-                    range(self.ntau), repeat=2):
++                    list(range(self.ntau)), repeat=2):
+                 if func(n1, n2): index.append((n1, n2))
+ 
+             index = np.array(index).T
+@@ -112,8 +112,8 @@ class SquareTrianglesMesh(SquareTrianglesBase):
+ 
+         """ for triqs three time greens functions """
+ 
+-        triangle_idx = [ [] for n in xrange(self.N) ]
+-        triangle_tau = [ [] for n in xrange(self.N) ]
++        triangle_idx = [ [] for n in range(self.N) ]
++        triangle_tau = [ [] for n in range(self.N) ]
+ 
+         for idxs, taus in enumerate_tau2(self.g3_tau):
+             
+@@ -125,7 +125,7 @@ class SquareTrianglesMesh(SquareTrianglesBase):
+                     triangle_tau[tidx] += [ taus ]
+                     break
+ 
+-        for tidx in xrange(self.N):
++        for tidx in range(self.N):
+             func, perm, perm_sign = self.triangle_list[tidx]
+ 
+             yield triangle_idx[tidx], triangle_tau[tidx], perm, perm_sign
+diff --git a/pyed/TriqsExactDiagonalization.py b/pyed/TriqsExactDiagonalization.py
+index 65088bf..22df1cd 100644
+--- a/pyed/TriqsExactDiagonalization.py
++++ b/pyed/TriqsExactDiagonalization.py
+@@ -130,7 +130,7 @@ class TriqsExactDiagonalization(object):
+         raw_tail = self.ed.get_high_frequency_tail_coeff_component(
+             op1_mat, op2_mat, self.xi(g.mesh), Norder=tail.order_max)
+ 
+-        for idx in xrange(tail.order_max):
++        for idx in range(tail.order_max):
+             tail[idx+1] = raw_tail[idx]
+ 
+     # ------------------------------------------------------------------
+diff --git a/pyed/tests/test_operator_utils.py b/pyed/tests/test_operator_utils.py
+index c1cedd1..f4e4cd7 100644
+--- a/pyed/tests/test_operator_utils.py
++++ b/pyed/tests/test_operator_utils.py
+@@ -48,7 +48,7 @@ def test_gf_struct():
+         c('do', 2),
+         ]
+ 
+-    print fundamental_operators
++    print(fundamental_operators)
+     assert( fundamental_operators == fundamental_operators_ref )
+ 
+ # ----------------------------------------------------------------------
+@@ -73,7 +73,7 @@ def test_quadratic():
+     h_loc = np.random.random((n, n))
+     h_loc = 0.5 * (h_loc + h_loc.T)
+ 
+-    fund_op = [ c(0, idx) for idx in xrange(n) ]
++    fund_op = [ c(0, idx) for idx in range(n) ]
+     H_loc = get_quadratic_operator(h_loc, fund_op)
+     h_loc_ref = quadratic_matrix_from_operator(H_loc, fund_op)
+     
+@@ -83,7 +83,7 @@ def test_quadratic():
+ def test_quartic(verbose=False):
+ 
+     if verbose:
+-        print '--> test_quartic'
++        print('--> test_quartic')
+         
+     num_orbitals = 2
+     num_spins = 2
+@@ -92,13 +92,13 @@ def test_quartic(verbose=False):
+ 
+     up, do = 0, 1
+     spin_names = [up, do]
+-    orb_names = range(num_orbitals)
++    orb_names = list(range(num_orbitals))
+     
+     U_ab, UPrime_ab = U_matrix_kanamori(n_orb=2, U_int=U, J_hund=J)
+ 
+     if verbose:
+-        print 'U_ab =\n', U_ab
+-        print 'UPrime_ab =\n', UPrime_ab
++        print('U_ab =\n', U_ab)
++        print('UPrime_ab =\n', UPrime_ab)
+ 
+     T_ab = np.array([
+         [1., 1.],
+@@ -119,8 +119,8 @@ def test_quartic(verbose=False):
+     Ht_int = operator_single_particle_transform(H_int, T_ab_spin, op_imp)
+ 
+     if verbose:
+-        print 'H_int =', H_int
+-        print 'Ht_int =', Ht_int
++        print('H_int =', H_int)
++        print('Ht_int =', Ht_int)
+ 
+     from transform_kanamori import h_int_kanamori_transformed
+ 
+@@ -129,7 +129,7 @@ def test_quartic(verbose=False):
+         off_diag=True, map_operator_structure=None, H_dump=None)
+ 
+     if verbose:
+-        print 'Ht_int_ref =', Ht_int_ref
++        print('Ht_int_ref =', Ht_int_ref)
+     
+     assert( (Ht_int_ref - Ht_int).is_zero() )
+ 
+@@ -137,7 +137,7 @@ def test_quartic(verbose=False):
+ def test_single_particle_transform(verbose=False):
+ 
+     if verbose:
+-        print '--> test_single_particle_transform'
++        print('--> test_single_particle_transform')
+         
+     h_loc = np.array([
+         [1.0, 0.0],
+@@ -155,9 +155,9 @@ def test_single_particle_transform(verbose=False):
+     np.testing.assert_array_almost_equal(h_loc, h_loc_ref)
+ 
+     if verbose:
+-        print 'h_loc =\n', h_loc
+-        print 'h_loc_ref =\n', h_loc_ref
+-        print 'H_loc =', H_loc
++        print('h_loc =\n', h_loc)
++        print('h_loc_ref =\n', h_loc_ref)
++        print('H_loc =', H_loc)
+ 
+     T_ab = np.array([
+         [1., 1.],
+@@ -175,10 +175,10 @@ def test_single_particle_transform(verbose=False):
+     Ht_loc_ref = c_dag(0, 0) * c(0, 1) + c_dag(0, 1) * c(0, 0)
+ 
+     if verbose:
+-        print 'ht_loc =\n', ht_loc
+-        print 'ht_loc_ref =\n', ht_loc_ref
+-        print 'Ht_loc =', Ht_loc
+-        print 'Ht_loc_ref =', Ht_loc_ref
++        print('ht_loc =\n', ht_loc)
++        print('ht_loc_ref =\n', ht_loc_ref)
++        print('Ht_loc =', Ht_loc)
++        print('Ht_loc_ref =', Ht_loc_ref)
+     
+     assert( (Ht_loc - Ht_loc_ref).is_zero() )
+ 
+@@ -199,10 +199,10 @@ def test_quartic_tensor_from_operator(verbose=False):
+     np.testing.assert_array_almost_equal(U_ref, U_sym)
+ 
+     if verbose:
+-        print '-'*72
++        print('-'*72)
+         import itertools
+-        for idxs in itertools.product(range(N), repeat=4):
+-            print idxs, U_ref[idxs] - U_sym[idxs], U[idxs], U_ref[idxs], U_sym[idxs]
++        for idxs in itertools.product(list(range(N)), repeat=4):
++            print(idxs, U_ref[idxs] - U_sym[idxs], U[idxs], U_ref[idxs], U_sym[idxs])
+ 
+ # ----------------------------------------------------------------------
+ if __name__ == '__main__':
+-- 
+2.28.0
+
