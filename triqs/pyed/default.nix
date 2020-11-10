@@ -1,4 +1,4 @@
-{ buildPythonPackage, fetchFromGitHub, numpy, triqs }:
+{ buildPythonPackage, fetchFromGitHub, numpy, scipy, triqs }:
 
 let rev = "7d42498f217101cc725aed6c20647360ec01aad0";
 in buildPythonPackage rec {
@@ -15,7 +15,7 @@ in buildPythonPackage rec {
   patches =
     [ ./0001-setup.py.patch ./0002-pytriqs-triqs.patch ./0003-2to3.patch ];
 
-  propagatedBuildInputs = [ numpy triqs ];
+  propagatedBuildInputs = [ numpy scipy triqs ];
 
   doCheck = false;
 }
