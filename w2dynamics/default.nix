@@ -1,4 +1,4 @@
-{ stdenv, cmake, gfortran, blas-reference, lapack-reference, fftw, nfft, python3
+{ stdenv, cmake, gfortran, openblasCompat, fftw, nfft, python3
 , python3Packages }:
 
 let
@@ -18,7 +18,7 @@ in stdenv.mkDerivation rec {
 
   enableParallelBuilding = false;
 
-  buildInputs = [ gfortran blas-reference lapack-reference fftw nfft ];
+  buildInputs = [ gfortran openblasCompat fftw nfft ];
 
   pythonPath = with python3Packages; [ numpy scipy h5py mpi4py configobj ];
   propagatedBuildInputs = pythonPath;

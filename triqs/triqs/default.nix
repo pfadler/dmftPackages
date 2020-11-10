@@ -1,5 +1,5 @@
 { stdenv, fetchFromGitHub, cmake, gtest, python3Packages, boost, cpp2py, fftw
-, gmp, h5, itertools, mpi, ncurses, openblas }:
+, gmp, h5, itertools, mpi, ncurses, openblasCompat }:
 
 stdenv.mkDerivation rec {
   pname = "triqs";
@@ -14,7 +14,7 @@ stdenv.mkDerivation rec {
 
   patches = [ ./triqs.patch ];
   nativeBuildInputs = [ cmake gtest python3Packages.wrapPython ];
-  buildInputs = [ boost cpp2py fftw gmp itertools mpi ncurses openblas ];
+  buildInputs = [ boost cpp2py fftw gmp itertools mpi ncurses openblasCompat ];
   pythonPath = with python3Packages; [ numpy matplotlib mpi4py Mako scipy ];
   propagatedBuildInputs = [ h5 ] ++ pythonPath;
   postFixup = "wrapPythonPrograms";
