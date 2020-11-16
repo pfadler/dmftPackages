@@ -1,0 +1,12 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index ef78ecc..755169f 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -73,6 +73,7 @@ option(Testing "Enable testing" ON)
+ 
+ if (Testing)
+   add_library(gtest ./test/gtest-all.cc ./test/gtest_main.cc)
++  target_link_libraries(gtest pthread)
+   list(APPEND LINK_ALL libmaxent)
+   enable_testing(test)
+   add_subdirectory(test)

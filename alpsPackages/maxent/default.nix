@@ -11,9 +11,11 @@ stdenv.mkDerivation rec {
     sha256 = "sha256:1fkx0z8brqla3yis4f12p0qj3axiill8n0ima2xdnhq5iqz4jn1f";
   };
 
+  patches = [ ./pthread.patch ];
+
   nativeBuildInputs = [ cmake ];
 
-  cmakeFlags = [ "-DTesting=OFF" ];
-
   buildInputs = [ alpsCore boost eigen gsl ];
+
+  doCheck = true;
 }
