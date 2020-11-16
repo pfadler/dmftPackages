@@ -1,4 +1,4 @@
-{ stdenv, fetchFromGitHub, cmake, gtest, itertools, openmpi }:
+{ stdenv, fetchFromGitHub, cmake, gtest, itertools, openmpi, openssh }:
 
 stdenv.mkDerivation rec {
   pname = "mpi";
@@ -14,4 +14,7 @@ stdenv.mkDerivation rec {
   patches = [ ./mpi.patch ];
   nativeBuildInputs = [ cmake gtest ];
   buildInputs = [ itertools openmpi ];
+
+  checkInputs = [ openssh ];
+  doCheck = true;
 }

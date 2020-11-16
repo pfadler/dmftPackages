@@ -1,4 +1,5 @@
-{ stdenv, fetchFromGitHub, cmake, gtest, cpp2py, itertools, mpi, triqs, ncurses, nfft }:
+{ stdenv, fetchFromGitHub, cmake, gtest, cpp2py, itertools, mpi, triqs, ncurses
+, nfft, openssh }:
 
 stdenv.mkDerivation rec {
   pname = "cthyb";
@@ -15,4 +16,7 @@ stdenv.mkDerivation rec {
   nativeBuildInputs = [ cmake gtest ];
   buildInputs = [ cpp2py itertools mpi ncurses nfft ];
   propagatedBuildInputs = [ triqs ];
+
+  checkInputs = [ openssh ];
+  doCheck = true;
 }

@@ -13,4 +13,6 @@ stdenv.mkDerivation rec {
 
   patches = [ ./itertools.patch ];
   nativeBuildInputs = [ cmake gtest ];
+
+  doCheck = true;
 }

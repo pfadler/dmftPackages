@@ -1,4 +1,5 @@
-{ stdenv, fetchFromGitHub, cmake, gtest, cpp2py, hdf5, ncurses, python3Packages }:
+{ stdenv, fetchFromGitHub, cmake, gtest, cpp2py, hdf5, ncurses, python3Packages
+}:
 
 stdenv.mkDerivation rec {
   pname = "h5";
@@ -15,4 +16,6 @@ stdenv.mkDerivation rec {
   nativeBuildInputs = [ cmake gtest ];
   buildInputs = [ cpp2py hdf5 ncurses ];
   propagatedBuildInputs = with python3Packages; [ numpy ];
+
+  doCheck = true;
 }

@@ -16,4 +16,6 @@ stdenv.mkDerivation rec {
   pythonPath = with python3Packages; [ h5py Mako numpy scipy ];
   propagatedBuildInputs = pythonPath;
   postFixup = "wrapPythonPrograms";
+
+  doCheck = true;
 }

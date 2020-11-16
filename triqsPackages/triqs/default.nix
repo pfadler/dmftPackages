@@ -1,5 +1,5 @@
 { stdenv, fetchFromGitHub, cmake, gtest, python3Packages, boost, cpp2py, fftw
-, gmp, h5, itertools, mpi, ncurses, openblasCompat }:
+, gmp, h5, itertools, mpi, ncurses, openblasCompat, openssh }:
 
 stdenv.mkDerivation rec {
   pname = "triqs";
@@ -18,4 +18,8 @@ stdenv.mkDerivation rec {
   pythonPath = with python3Packages; [ numpy matplotlib mpi4py Mako scipy ];
   propagatedBuildInputs = [ h5 ] ++ pythonPath;
   postFixup = "wrapPythonPrograms";
+
+  UCX_LOG_FILE = "ucx.log";
+  checkInputs = [ openssh ];
+  doCheck = true;
 }
