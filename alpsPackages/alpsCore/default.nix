@@ -1,4 +1,4 @@
-{ stdenv, fetchFromGitHub, cmake, boost, eigen, hdf5 }:
+{ stdenv, fetchFromGitHub, cmake, boost, eigen, hdf5, openmpi }:
 
 stdenv.mkDerivation rec {
   pname = "ALPSCore";
@@ -12,5 +12,8 @@ stdenv.mkDerivation rec {
   };
 
   nativeBuildInputs = [ cmake ];
-  buildInputs = [ boost eigen hdf5 ];
+  cmakeFlags = [ "-DENABLE_MPI=On" ];
+  buildInputs = [ boost eigen hdf5 openmpi ];
+
+  doCheck = false;
 }
