@@ -1,4 +1,4 @@
-{ stdenv, fetchFromGitHub, cmake, boost, eigen, hdf5, openmpi }:
+{ stdenv, fetchFromGitHub, cmake, boost, eigen, hdf5, openmpi, openssh }:
 
 stdenv.mkDerivation rec {
   pname = "ALPSCore";
@@ -12,8 +12,11 @@ stdenv.mkDerivation rec {
   };
 
   nativeBuildInputs = [ cmake ];
-  cmakeFlags = [ "-DENABLE_MPI=On" ];
+  cmakeFlags = [ "-DENABLE_MPI=On" "-DCMAKE_SKIP_BUILD_RPATH=OFF" ];
   buildInputs = [ boost eigen hdf5 openmpi ];
 
-  doCheck = false;
+  # Don't try to build this on an overcommitted system
+  enableParallelChecking = false;
+  checkInputs = [ openssh ];
+  doCheck = true;
 }
