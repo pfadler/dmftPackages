@@ -18,5 +18,5 @@ stdenv.mkDerivation rec {
   # Don't try to build this on an overcommitted system
   enableParallelChecking = false;
   checkInputs = [ openssh ];
-  doCheck = true;
+  doCheck = false;
 }
