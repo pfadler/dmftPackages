@@ -1,8 +1,16 @@
-{ stdenv, cmake, gfortran, openblasCompat, fftw, nfft, python3, python3Packages
+{ stdenv
+, cmake
+, gfortran
+, openblasCompat
+, fftw
+, nfft
+, python3
+, python3Packages
 }:
-
-let rev = "0da9391257be39a3f3d58fb6f705ea22f96d655f";
-in stdenv.mkDerivation rec {
+let
+  rev = "199783a828b66c675c430321f2d23a4595bd485e";
+in
+stdenv.mkDerivation rec {
   pname = "w2dynamics";
   version = "git-${builtins.substring 0 7 rev}";
 
