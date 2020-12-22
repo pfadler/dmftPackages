@@ -8,7 +8,7 @@
 , python3Packages
 }:
 let
-  rev = "199783a828b66c675c430321f2d23a4595bd485e";
+  rev = "aa779ebf9c8337152c824e1f5128bfa97c412a59";
 in
 stdenv.mkDerivation rec {
   pname = "w2dynamics";
