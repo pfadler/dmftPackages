@@ -17,6 +17,7 @@
       in
       rec {
         packages = flake-utils.lib.flattenTree pkgs.dmftPackages;
+        legacyPackages = pkgs.dmftPackages;
         checks = packages;
       });
 }
