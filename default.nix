@@ -3,13 +3,25 @@
       let
         lock = builtins.fromJSON (builtins.readFile ./flake.lock);
       in
-      with lock.nodes.nixpkgs.locked; fetchTarball {
+      fetchTarball (with lock.nodes.nixpkgs.locked; {
         url = "https://github.com/${owner}/${repo}/archive/${rev}.tar.gz";
         sha256 = narHash;
-      }
+      })
     )
-    { overlays = [ (import ./overlay.nix) ]; })
+    { })
 }:
-(if pkgs ? dmftPackages
-then pkgs
-else pkgs.appendOverlays [ (import ./overlay.nix) ]).dmftPackages
+
+with pkgs;
+let
+  newScope = extra: lib.callPackageWith (pkgs // extra);
+in
+lib.makeScope newScope (self:
+  with self; {
+    alpsPackages = callPackage ./alpsPackages { };
+
+    nfft = callPackage ./nfft { };
+
+    triqsPackages = callPackage ./triqsPackages { };
+
+    w2dynamics = callPackage ./w2dynamics { };
+  })

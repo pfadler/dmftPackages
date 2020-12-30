@@ -10,14 +10,11 @@
     } //
     flake-utils.lib.eachDefaultSystem (system:
       let
-        pkgs = import nixpkgs {
-          inherit system;
-          overlays = [ self.overlay ];
-        };
+        dmftPackages = import ./. { pkgs = nixpkgs.legacyPackages.${system}; };
       in
-      rec {
-        packages = flake-utils.lib.flattenTree pkgs.dmftPackages;
-        legacyPackages = pkgs.dmftPackages;
-        checks = packages;
+      {
+        packages = flake-utils.lib.flattenTree dmftPackages;
+        legacyPackages = dmftPackages;
+        checks = self.packages.${system};
       });
 }
