@@ -25,12 +25,14 @@ stdenv.mkDerivation rec {
   };
 
   nativeBuildInputs = [ cmake ];
+  cmakeFlags = [ "-DCMAKE_CXX_FLAGS=-fconcepts" ];
   buildInputs = [
     pomerol
     ncurses
     openmpi
   ] ++ (with triqsPackages; [
     cpp2py
+    h5
     itertools
     mpi
     triqs
