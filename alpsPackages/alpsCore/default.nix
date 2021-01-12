@@ -15,8 +15,7 @@ stdenv.mkDerivation rec {
   cmakeFlags = [ "-DENABLE_MPI=On" "-DCMAKE_SKIP_BUILD_RPATH=OFF" ];
   buildInputs = [ boost eigen hdf5 openmpi ];
 
-  # Don't try to build this on an overcommitted system
-  enableParallelChecking = false;
+  OMPI_MCA_rmaps_base_oversubscribe = "yes";
   checkInputs = [ openssh ];
-  doCheck = false;
+  doCheck = true;
 }
