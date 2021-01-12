@@ -21,6 +21,8 @@ lib.makeScope newScope (self:
 
     nfft = callPackage ./nfft { };
 
+    pomerolPackages = callPackage ./pomerolPackages { };
+
     triqsPackages = callPackage ./triqsPackages { };
 
     w2dynamics = callPackage ./w2dynamics { };
