@@ -1,3 +1,15 @@
+diff --git a/gftools/eval_expression.hpp b/gftools/eval_expression.hpp
+index 70dd84e..caea08c 100644
+--- a/gftools/eval_expression.hpp
++++ b/gftools/eval_expression.hpp
+@@ -2,6 +2,7 @@
+ 
+ #include <utility>
+ #include <array>
++#include <cstddef>
+ 
+ //#include "tuple_tools.hpp" // only for debug
+ 
 diff --git a/test/CMakeLists.txt b/test/CMakeLists.txt
 index 2776f17..99c4289 100644
 --- a/test/CMakeLists.txt
