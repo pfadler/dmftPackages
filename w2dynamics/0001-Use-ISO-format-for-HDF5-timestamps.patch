@@ -1,0 +1,50 @@
+From 593c83470c0e4ac9562d1dba4f8636b742364114 Mon Sep 17 00:00:00 2001
+From: Henri Menke <henri@henrimenke.de>
+Date: Fri, 30 Oct 2020 11:43:27 +0100
+Subject: [PATCH] Use ISO format for HDF5 timestamps
+
+This allows parsing the timestamp easily using shell utilities.
+Additionally timestamps are recorded in UTC so that they are
+timezone-independent.
+
+Old format: prefix-2020-10-30-Fri-12-46-42.hdf5
+New format: prefix-2020-10-30T11:46:42Z.hdf5
+---
+ w2dyn/auxiliaries/hdfout.py | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/w2dyn/auxiliaries/hdfout.py b/w2dyn/auxiliaries/hdfout.py
+index 976ccbf..cc1ef6f 100644
+--- a/w2dyn/auxiliaries/hdfout.py
++++ b/w2dyn/auxiliaries/hdfout.py
+@@ -1,6 +1,6 @@
+ from __future__ import (absolute_import, division,
+                         print_function, unicode_literals)
+-import time
++import datetime
+ import os
+ from warnings import warn
+ import h5py as hdf5
+@@ -164,8 +164,8 @@ class HdfOutput:
+         if self.is_writer:
+             # generate prefix-time file name for HDF5 output file
+             if start_time is None:
+-                start_time = time.localtime()
+-            runstring = time.strftime("%Y-%m-%d-%a-%H-%M-%S", start_time)
++                start_time = datetime.datetime.utcnow()
++            runstring = start_time.isoformat(timespec="seconds") + "Z"
+             self.filename = "%s-%s.hdf5" % (config["General"]["FileNamePrefix"],
+                                             runstring)
+             self.filename = mpi_comm.bcast(self.filename, root=0)
+@@ -189,7 +189,7 @@ class HdfOutput:
+                         dtype=h5ustrs)
+         if git_revision is not None:
+             hf.attrs["git-revision"] = git_revision
+-        hf.attrs["run-date"] = time.strftime("%c", start_time)
++        hf.attrs["run-date"] = start_time.strftime("%c")
+ 
+         # write configureation of current run
+         hfgrp = hf.create_group(".config")
+-- 
+2.29.2
+

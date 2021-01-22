@@ -8,16 +8,18 @@
 , python3Packages
 }:
 let
-  rev = "aa779ebf9c8337152c824e1f5128bfa97c412a59";
+  rev = "521f0f40ea7a0cfbef0faa82a4b7a6e030db1f9c";
 in
 stdenv.mkDerivation rec {
   pname = "w2dynamics";
-  version = "git-${builtins.substring 0 7 rev}";
+  version = "1.0+git20210120.${builtins.substring 0 7 rev}";
 
   src = builtins.fetchGit {
-    url = "git+ssh://git@git.physik.uni-wuerzburg.de/hmenke/w2dynamics.git";
+    url = "git+ssh://git@git.physik.uni-wuerzburg.de/w2dynamics/w2dynamics.git";
     inherit rev;
   };
+
+  patches = [ ./0001-Use-ISO-format-for-HDF5-timestamps.patch ];
 
   nativeBuildInputs = [ cmake python3Packages.wrapPython ];
 
