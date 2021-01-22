@@ -1,19 +1,17 @@
 { buildPythonPackage, fetchFromGitHub, numpy, scipy, triqs }:
-
-let rev = "7d42498f217101cc725aed6c20647360ec01aad0";
-in buildPythonPackage rec {
+let
+  rev = "e6a5b7db20d3cc94383e29c9050ffc47267a8584";
+in
+buildPythonPackage rec {
   pname = "pyed";
-  version = "git-${builtins.substring 0 7 rev}";
+  version = "1.0+git20210122.${builtins.substring 0 7 rev}";
 
   src = fetchFromGitHub {
     owner = "HugoStrand";
     repo = pname;
     inherit rev;
-    sha256 = "00pa34pkpww7sl02h6zx4v44h4np3yhc6nic4v3fc16lqa50f0hx";
+    sha256 = "sha256-6yyGhnvg8aYDi0EYdYfD+IJANLfaUIsyiWPXlbMDvjM=";
   };
-
-  patches =
-    [ ./0001-setup.py.patch ./0002-pytriqs-triqs.patch ./0003-2to3.patch ];
 
   propagatedBuildInputs = [ numpy scipy triqs ];
 
