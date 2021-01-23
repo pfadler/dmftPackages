@@ -1,4 +1,12 @@
-{ stdenv, fetchFromGitHub, cmake, gtest, boost, eigen, openssh }:
+{ stdenv
+, lib
+, fetchFromGitHub
+, cmake
+, gtest
+, boost
+, eigen
+, openssh
+}:
 
 stdenv.mkDerivation rec {
   pname = "gftools";
@@ -17,4 +25,11 @@ stdenv.mkDerivation rec {
   buildInputs = [ boost eigen ];
 
   doCheck = true;
+
+  meta = {
+    description = "gftools is a set of tools to work with numerical condmat problems";
+    homepage = "https://github.com/aeantipov/gftools";
+    license = lib.licenses.mit;
+    maintainers = with lib.maintainers; [ hmenke ];
+  };
 }

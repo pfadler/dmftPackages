@@ -1,5 +1,20 @@
-{ stdenv, fetchFromGitHub, cmake, gtest, python3Packages, boost, cpp2py, fftw
-, gmp, h5, itertools, mpi, ncurses, openblasCompat, openssh }:
+{ stdenv
+, lib
+, fetchFromGitHub
+, cmake
+, gtest
+, python3Packages
+, boost
+, cpp2py
+, fftw
+, gmp
+, h5
+, itertools
+, mpi
+, ncurses
+, openblasCompat
+, openssh
+}:
 
 stdenv.mkDerivation rec {
   pname = "triqs";
@@ -22,4 +37,11 @@ stdenv.mkDerivation rec {
   UCX_LOG_FILE = "ucx.log";
   checkInputs = [ openssh ];
   doCheck = true;
+
+  meta = {
+    description = "Toolbox for Research on Interacting Quantum Systems";
+    homepage = "https://triqs.github.io/";
+    license = lib.licenses.gpl3Plus;
+    maintainers = with lib.maintainers; [ hmenke ];
+  };
 }

@@ -1,4 +1,12 @@
-{ stdenv, fetchFromGitHub, cmake, gtest, cpp2py, hdf5, ncurses, python3Packages
+{ stdenv
+, lib
+, fetchFromGitHub
+, cmake
+, gtest
+, cpp2py
+, hdf5
+, ncurses
+, python3Packages
 }:
 
 stdenv.mkDerivation rec {
@@ -18,4 +26,11 @@ stdenv.mkDerivation rec {
   propagatedBuildInputs = with python3Packages; [ numpy ];
 
   doCheck = true;
+
+  meta = {
+    description = "h5 is a high-level C++ interface to the hdf5 library";
+    homepage = "https://github.com/TRIQS/h5";
+    license = lib.licenses.asl20;
+    maintainers = with lib.maintainers; [ hmenke ];
+  };
 }

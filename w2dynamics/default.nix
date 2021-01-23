@@ -1,4 +1,5 @@
 { stdenv
+, lib
 , cmake
 , gfortran
 , openblasCompat
@@ -35,4 +36,11 @@ stdenv.mkDerivation rec {
   postFixup = "wrapPythonPrograms";
 
   doCheck = true;
+
+  meta = {
+    description = "Wien/Wuerzburg strong coupling solver";
+    homepage = "https://github.com/w2dynamics/w2dynamics";
+    license = lib.licenses.gpl3Only;
+    maintainers = with lib.maintainers; [ hmenke ];
+  };
 }

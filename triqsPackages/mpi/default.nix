@@ -1,4 +1,12 @@
-{ stdenv, fetchFromGitHub, cmake, gtest, itertools, openmpi, openssh }:
+{ stdenv
+, lib
+, fetchFromGitHub
+, cmake
+, gtest
+, itertools
+, openmpi
+, openssh
+}:
 
 stdenv.mkDerivation rec {
   pname = "mpi";
@@ -17,4 +25,11 @@ stdenv.mkDerivation rec {
 
   checkInputs = [ openssh ];
   doCheck = true;
+
+  meta = {
+    description = "mpi is a high-level C++ interface to the Message Passing Interface";
+    homepage = "https://github.com/TRIQS/mpi";
+    license = lib.licenses.asl20;
+    maintainers = with lib.maintainers; [ hmenke ];
+  };
 }

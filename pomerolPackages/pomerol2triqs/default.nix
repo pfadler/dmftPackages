@@ -1,4 +1,5 @@
 { stdenv
+, lib
 , fetchFromGitHub
 , cmake
 , gtest
@@ -9,7 +10,6 @@
 , openmpi
 , openssh
 }:
-
 let
   rev = "719e69a23bbee0de69fdae0cacc452227241e06e";
 in
@@ -41,4 +41,11 @@ stdenv.mkDerivation rec {
   OMPI_MCA_rmaps_base_oversubscribe = "yes";
   checkInputs = [ openssh ];
   doCheck = true;
+
+  meta = {
+    description = "Quick and dirty TRIQS wrapper around the Pomerol exact diagonalization library";
+    homepage = "https://github.com/krivenko/pomerol2triqs";
+    license = lib.licenses.gpl3Only;
+    maintainers = with lib.maintainers; [ hmenke ];
+  };
 }

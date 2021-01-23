@@ -1,4 +1,12 @@
-{ stdenv, fetchFromGitHub, cmake, alpsCore, boost, eigen, gsl }:
+{ stdenv
+, lib
+, fetchFromGitHub
+, cmake
+, alpsCore
+, boost
+, eigen
+, gsl
+}:
 
 stdenv.mkDerivation rec {
   pname = "Maxent";
@@ -18,4 +26,11 @@ stdenv.mkDerivation rec {
   buildInputs = [ alpsCore boost eigen gsl ];
 
   doCheck = true;
+
+  meta = {
+    description = "A utility for performing analytic continuation using the method of Maximum Entropy";
+    homepage = "https://github.com/CQMP/Maxent";
+    license = lib.licenses.gpl2Only;
+    maintainers = with lib.maintainers; [ hmenke ];
+  };
 }

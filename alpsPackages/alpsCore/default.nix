@@ -1,4 +1,13 @@
-{ stdenv, fetchFromGitHub, cmake, boost, eigen, hdf5, openmpi, openssh }:
+{ stdenv
+, lib
+, fetchFromGitHub
+, cmake
+, boost
+, eigen
+, hdf5
+, openmpi
+, openssh
+}:
 
 stdenv.mkDerivation rec {
   pname = "ALPSCore";
@@ -18,4 +27,11 @@ stdenv.mkDerivation rec {
   OMPI_MCA_rmaps_base_oversubscribe = "yes";
   checkInputs = [ openssh ];
   doCheck = true;
+
+  meta = {
+    description = "Algorithms and Libraries for Physics Simulations";
+    homepage = "https://github.com/ALPSCore/ALPSCore";
+    license = lib.licenses.gpl2Only;
+    maintainers = with lib.maintainers; [ hmenke ];
+  };
 }

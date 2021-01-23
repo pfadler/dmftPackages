@@ -1,4 +1,5 @@
 { stdenv
+, lib
 , fetchFromGitHub
 , cmake
 , gtest
@@ -8,7 +9,6 @@
 , openmpi
 , openssh
 }:
-
 let
   rev = "fd312b2bc1918e0fd2f463315efe01a84a4a25ef";
 in
@@ -35,4 +35,11 @@ stdenv.mkDerivation rec {
   OMPI_MCA_rmaps_base_oversubscribe = "yes";
   checkInputs = [ openssh ];
   doCheck = true;
+
+  meta = {
+    description = "Exact diagonalization code for solving condensed matter second-quantized models of interacting fermions on finite size lattices at finite temperatures";
+    homepage = "https://aeantipov.github.io/pomerol/";
+    license = lib.licenses.gpl2Only;
+    maintainers = with lib.maintainers; [ hmenke ];
+  };
 }

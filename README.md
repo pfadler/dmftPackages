@@ -6,9 +6,9 @@ A package collection for DMFT simulations.
 
 ## Binary cache
 
-Binaries are built nightly for the version of nixpkgs pinned in `flake.lock`, as
-well as for the latest stable and unstable branch of NixOS and pushed to Cachix.
-To use the cache, either execute
+Binaries are built nightly for the version of nixpkgs pinned in
+[`flake.lock`](flake.lock), as well as for the latest stable and unstable branch
+of NixOS and pushed to Cachix.  To use the cache, either execute
 ```console
 $ nix-shell -p cachix --run "cachix use hmenke"
 ```
@@ -38,7 +38,7 @@ in
 
 ### As a tarball
 
-Instead of adding as a channel you can also fetch the tarball for a specific
+Instead of adding it as a channel you can also fetch the tarball for a specific
 commit to pin the versions
 ```nix
 let
@@ -62,9 +62,9 @@ The package set is also available as a flake.
 }
 ```
 
-However, all the packages are exported as a flattened tree because flakes
-doesn't support nested attribute sets in the `packages` output.  So to use one
-of the nested packages you have to specify it as
+However, all the packages are exported as a flattened tree with levels separated
+by `/` because flakes doesn't support nested attribute sets in the `packages`
+output.  So to use one of the nested packages you have to specify it as
 ```nix
 dmftPackages.packages.x86_64-linux."triqsPackages/triqs"
 ```
@@ -75,8 +75,8 @@ dmftPackages.legacyPackages.x86_64-linux.triqsPackages.triqs
 
 ## Notes
 
- 1. When importing dmftPackages the user can pass a specific verion of nixpkgs
-    as an argument to use a specific checkout of nixpkgs, e.g.
+ 1. When importing dmftPackages you can pass a specific version of nixpkgs as an
+    argument to use a specific checkout of nixpkgs, e.g.
     ```nix
     let
       pinnedPkgs = import (fetchTarball {
@@ -92,21 +92,24 @@ dmftPackages.legacyPackages.x86_64-linux.triqsPackages.triqs
     ```
 
  2. Related to 1., when the `pkgs` argument is left out, the pinned version of
-    nixpkgs from `flake.lock` will be used.
+    nixpkgs from [`flake.lock`](flake.lock) will be used.
 
- 3. The w2dynamics program is hosted on a private repository but to compute the
+ 3. The attribute names follow the directory structure.  The attribute names are
+    also case-insensitive equal to `pname`.
+
+ 4. The w2dynamics program is hosted on a private repository but to compute the
     NAR hash for downloading the prebuilt binaries you need the source code, so
     unless you have access to the source you can neither download binaries nor
     build it yourself.
-    
- 4. All packages that have checks have their checks run when building to ensure
+
+ 5. All packages that have checks have their checks run when building to ensure
     the correctness of the resulting binaries.
-    
- 5. There is also an overlay in case you want to install these packages in your
+
+ 6. There is also an overlay in case you want to install these packages in your
     local or global environment, e.g. on NixOS.
 
 ## Known issues / TODO
 
   - Ensure that builds are reproducible
-  
+
   - macOS builds

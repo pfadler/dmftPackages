@@ -1,4 +1,11 @@
-{ stdenv, fetchFromGitHub, autoconf, automake, libtool, fftw }:
+{ stdenv
+, lib
+, fetchFromGitHub
+, autoconf
+, automake
+, libtool
+, fftw
+}:
 
 stdenv.mkDerivation rec {
   pname = "nfft";
@@ -19,4 +26,11 @@ stdenv.mkDerivation rec {
   buildInputs = [ fftw ];
 
   doCheck = true;
+
+  meta = {
+    description = "Nonequispaced fast Fourier transform";
+    homepage = "https://www-user.tu-chemnitz.de/~potts/nfft/";
+    license = lib.licenses.gpl2Only;
+    maintainers = with lib.maintainers; [ hmenke ];
+  };
 }

@@ -1,5 +1,16 @@
-{ stdenv, fetchFromGitHub, cmake, gtest, cpp2py, itertools, mpi, triqs, ncurses
-, nfft, openssh }:
+{ stdenv
+, lib
+, fetchFromGitHub
+, cmake
+, gtest
+, cpp2py
+, itertools
+, mpi
+, triqs
+, ncurses
+, nfft
+, openssh
+}:
 
 stdenv.mkDerivation rec {
   pname = "cthyb";
@@ -19,4 +30,11 @@ stdenv.mkDerivation rec {
 
   checkInputs = [ openssh ];
   doCheck = true;
+
+  meta = {
+    description = "Toolbox for Research on Interacting Quantum Systems";
+    homepage = "https://triqs.github.io/cthyb/";
+    license = lib.licenses.gpl3Plus;
+    maintainers = with lib.maintainers; [ hmenke ];
+  };
 }

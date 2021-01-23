@@ -1,4 +1,11 @@
-{ stdenv, fetchFromGitHub, cmake, python3Packages, llvmPackages, python3 }:
+{ stdenv
+, lib
+, fetchFromGitHub
+, cmake
+, python3Packages
+, llvmPackages
+, python3
+}:
 
 stdenv.mkDerivation rec {
   pname = "cpp2py";
@@ -18,4 +25,11 @@ stdenv.mkDerivation rec {
   postFixup = "wrapPythonPrograms";
 
   doCheck = true;
+
+  meta = {
+    description = "Cpp2Py is the Python-C++ interfacing tool of the TRIQS project";
+    homepage = "https://github.com/TRIQS/cpp2py";
+    license = lib.licenses.asl20;
+    maintainers = with lib.maintainers; [ hmenke ];
+  };
 }
