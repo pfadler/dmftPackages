@@ -3,7 +3,7 @@
 , fetchFromGitHub
 , numpy
 , scipy
-, triqs
+, triqsPackages
 }:
 let
   rev = "e6a5b7db20d3cc94383e29c9050ffc47267a8584";
@@ -19,7 +19,7 @@ buildPythonPackage rec {
     sha256 = "sha256-6yyGhnvg8aYDi0EYdYfD+IJANLfaUIsyiWPXlbMDvjM=";
   };
 
-  propagatedBuildInputs = [ numpy scipy triqs ];
+  propagatedBuildInputs = [ numpy scipy triqsPackages.triqs ];
 
   doCheck = false;
 

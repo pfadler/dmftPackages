@@ -4,7 +4,7 @@
 , cmake
 , gtest
 , boost
-, pomerol
+, pomerolPackages
 , triqsPackages
 , ncurses
 , openmpi
@@ -27,16 +27,15 @@ stdenv.mkDerivation rec {
   nativeBuildInputs = [ cmake ];
   cmakeFlags = [ "-DCMAKE_CXX_FLAGS=-fconcepts" ];
   buildInputs = [
-    pomerol
-    ncurses
     openmpi
-  ] ++ (with triqsPackages; [
-    cpp2py
-    h5
-    itertools
-    mpi
-    triqs
-  ]);
+    ncurses
+    pomerolPackages.pomerol
+    triqsPackages.cpp2py
+    triqsPackages.h5
+    triqsPackages.itertools
+    triqsPackages.mpi
+    triqsPackages.triqs
+  ];
 
   OMPI_MCA_rmaps_base_oversubscribe = "yes";
   checkInputs = [ openssh ];

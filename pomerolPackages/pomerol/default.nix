@@ -5,7 +5,7 @@
 , gtest
 , boost
 , eigen
-, gftools
+, pomerolPackages
 , openmpi
 , openssh
 }:
@@ -37,7 +37,7 @@ stdenv.mkDerivation rec {
         mpi = openmpi;
       };
     in
-    [ boostWithMpi eigen gftools openmpi ];
+    [ boostWithMpi eigen pomerolPackages.gftools openmpi ];
 
   OMPI_MCA_rmaps_base_oversubscribe = "yes";
   checkInputs = [ openssh ];

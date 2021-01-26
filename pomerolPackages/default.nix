@@ -1,13 +1,11 @@
-{ lib, newScope, recurseIntoAttrs }:
+{ recurseIntoAttrs, callPackage }:
 
-lib.makeScope newScope (self:
-  with self;
-  recurseIntoAttrs {
+recurseIntoAttrs {
 
-    gftools = callPackage ./gftools { };
+  gftools = callPackage ./gftools { };
 
-    pomerol = callPackage ./pomerol { };
+  pomerol = callPackage ./pomerol { };
 
-    pomerol2triqs = callPackage ./pomerol2triqs { };
+  pomerol2triqs = callPackage ./pomerol2triqs { };
 
-  })
+}

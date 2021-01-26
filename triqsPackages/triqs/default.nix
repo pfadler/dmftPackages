@@ -5,12 +5,9 @@
 , gtest
 , python3Packages
 , boost
-, cpp2py
+, triqsPackages
 , fftw
 , gmp
-, h5
-, itertools
-, mpi
 , ncurses
 , openblasCompat
 , openssh
@@ -29,9 +26,18 @@ stdenv.mkDerivation rec {
 
   patches = [ ./triqs.patch ];
   nativeBuildInputs = [ cmake gtest python3Packages.wrapPython ];
-  buildInputs = [ boost cpp2py fftw gmp itertools mpi ncurses openblasCompat ];
+  buildInputs = [
+    boost
+    fftw
+    gmp
+    ncurses
+    openblasCompat
+    triqsPackages.cpp2py
+    triqsPackages.itertools
+    triqsPackages.mpi
+  ];
   pythonPath = with python3Packages; [ numpy matplotlib mpi4py Mako scipy ];
-  propagatedBuildInputs = [ h5 ] ++ pythonPath;
+  propagatedBuildInputs = [ triqsPackages.h5 ] ++ pythonPath;
   postFixup = "wrapPythonPrograms";
 
   UCX_LOG_FILE = "ucx.log";

@@ -3,10 +3,7 @@
 , fetchFromGitHub
 , cmake
 , gtest
-, cpp2py
-, itertools
-, mpi
-, triqs
+, triqsPackages
 , ncurses
 , nfft
 , openssh
@@ -25,8 +22,14 @@ stdenv.mkDerivation rec {
 
   patches = [ ./cthyb.patch ];
   nativeBuildInputs = [ cmake gtest ];
-  buildInputs = [ cpp2py itertools mpi ncurses nfft ];
-  propagatedBuildInputs = [ triqs ];
+  buildInputs = [
+    ncurses
+    nfft
+    triqsPackages.cpp2py
+    triqsPackages.itertools
+    triqsPackages.mpi
+  ];
+  propagatedBuildInputs = [ triqsPackages.triqs ];
 
   checkInputs = [ openssh ];
   doCheck = true;

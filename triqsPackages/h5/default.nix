@@ -3,7 +3,7 @@
 , fetchFromGitHub
 , cmake
 , gtest
-, cpp2py
+, triqsPackages
 , hdf5
 , ncurses
 , python3Packages
@@ -22,7 +22,7 @@ stdenv.mkDerivation rec {
 
   patches = [ ./h5.patch ];
   nativeBuildInputs = [ cmake gtest ];
-  buildInputs = [ cpp2py hdf5 ncurses ];
+  buildInputs = [ triqsPackages.cpp2py hdf5 ncurses ];
   propagatedBuildInputs = with python3Packages; [ numpy ];
 
   doCheck = true;

@@ -2,7 +2,7 @@
 , lib
 , fetchFromGitHub
 , cmake
-, alpsCore
+, alpsPackages
 , boost
 , eigen
 , gsl
@@ -23,7 +23,7 @@ stdenv.mkDerivation rec {
 
   nativeBuildInputs = [ cmake ];
 
-  buildInputs = [ alpsCore boost eigen gsl ];
+  buildInputs = [ alpsPackages.alpsCore boost eigen gsl ];
 
   doCheck = true;
 

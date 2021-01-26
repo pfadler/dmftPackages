@@ -3,7 +3,7 @@
 , fetchFromGitHub
 , cmake
 , gtest
-, itertools
+, triqsPackages
 , openmpi
 , openssh
 }:
@@ -21,7 +21,7 @@ stdenv.mkDerivation rec {
 
   patches = [ ./mpi.patch ];
   nativeBuildInputs = [ cmake gtest ];
-  buildInputs = [ itertools openmpi ];
+  buildInputs = [ triqsPackages.itertools openmpi ];
 
   checkInputs = [ openssh ];
   doCheck = true;
