@@ -5,7 +5,7 @@
 , boost
 , eigen
 , hdf5
-, openmpi
+, mpi
 , openssh
 }:
 
@@ -22,7 +22,7 @@ stdenv.mkDerivation rec {
 
   nativeBuildInputs = [ cmake ];
   cmakeFlags = [ "-DENABLE_MPI=On" "-DCMAKE_SKIP_BUILD_RPATH=OFF" ];
-  buildInputs = [ boost eigen hdf5 openmpi ];
+  buildInputs = [ boost eigen hdf5 mpi ];
 
   OMPI_MCA_rmaps_base_oversubscribe = "yes";
   checkInputs = [ openssh ];

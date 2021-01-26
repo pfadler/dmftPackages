@@ -6,7 +6,7 @@
 , boost
 , eigen
 , pomerolPackages
-, openmpi
+, mpi
 , openssh
 }:
 let
@@ -34,10 +34,10 @@ stdenv.mkDerivation rec {
     let
       boostWithMpi = boost.override {
         useMpi = true;
-        mpi = openmpi;
+        inherit mpi;
       };
     in
-    [ boostWithMpi eigen pomerolPackages.gftools openmpi ];
+    [ boostWithMpi eigen pomerolPackages.gftools mpi ];
 
   OMPI_MCA_rmaps_base_oversubscribe = "yes";
   checkInputs = [ openssh ];

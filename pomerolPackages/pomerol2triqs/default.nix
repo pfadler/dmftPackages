@@ -7,7 +7,7 @@
 , pomerolPackages
 , triqsPackages
 , ncurses
-, openmpi
+, mpi
 , openssh
 }:
 let
@@ -27,7 +27,7 @@ stdenv.mkDerivation rec {
   nativeBuildInputs = [ cmake ];
   cmakeFlags = [ "-DCMAKE_CXX_FLAGS=-fconcepts" ];
   buildInputs = [
-    openmpi
+    mpi
     ncurses
     pomerolPackages.pomerol
     triqsPackages.cpp2py

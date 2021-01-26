@@ -13,7 +13,8 @@
 
 with pkgs;
 let
-  newScope = extra: lib.callPackageWith (pkgs // extra);
+  mpiOverride = lib.optionalAttrs (!pkgs ? mpi) { mpi = openmpi; };
+  newScope = extra: lib.callPackageWith (pkgs // mpiOverride // extra);
 in
 lib.makeScope newScope (self:
   with self; {
