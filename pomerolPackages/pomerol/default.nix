@@ -30,7 +30,14 @@ stdenv.mkDerivation rec {
     "-DCXX11=ON"
     "-DCMAKE_SKIP_BUILD_RPATH=OFF"
   ];
-  buildInputs = [ (boost.override { mpi = openmpi; }) eigen gftools openmpi ];
+  buildInputs =
+    let
+      boostWithMpi = boost.override {
+        useMpi = true;
+        mpi = openmpi;
+      };
+    in
+    [ boostWithMpi eigen gftools openmpi ];
 
   OMPI_MCA_rmaps_base_oversubscribe = "yes";
   checkInputs = [ openssh ];
