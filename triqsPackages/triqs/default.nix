@@ -24,7 +24,7 @@ stdenv.mkDerivation rec {
     sha256 = "sha256:0gf5j4agslcyqrbyp9vwp88mpf2jpv0smmjh0b6jrwn54v8jpw08";
   };
 
-  patches = [ ./triqs.patch ];
+  patches = [ ./triqs.patch ./tail_issues.patch ];
   nativeBuildInputs = [ cmake gtest python3Packages.wrapPython ];
   buildInputs = [
     boost
