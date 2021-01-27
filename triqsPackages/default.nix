@@ -6,6 +6,8 @@ recurseIntoAttrs {
 
   cthyb = callPackage ./cthyb { };
 
+  ctint = callPackage ./ctint { };
+
   h5 = callPackage ./h5 { };
 
   itertools = callPackage ./itertools { };
