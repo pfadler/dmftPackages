@@ -42,7 +42,10 @@ jobs:
       run: |
         rev="$(git ls-remote https://github.com/NixOS/nixpkgs refs/heads/$channel | awk '{print $1}')"
         nixpkgs="fetchTarball \"https://github.com/NixOS/nixpkgs/archive/$rev.tar.gz\""
-        nix-build --show-trace ${channel:+--arg pkgs "import ($nixpkgs) {}"}
+        nix-build \
+            --show-trace \
+            --option allow-import-from-derivation false \
+            ${channel:+--arg pkgs "import ($nixpkgs) {}"}
       env:
         channel: '${{ matrix.channel }}'
   nix-flakes:
@@ -83,6 +86,10 @@ jobs:
         signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
     - name: Run nix flake check
       run: |
-        nix flake check --show-trace ${channel:+--override-input nixpkgs github:NixOS/nixpkgs/$channel}
+        nix flake check \
+            --show-trace \
+            --option allow-import-from-derivation false \
+            --option pure-eval true \
+            ${channel:+--override-input nixpkgs github:NixOS/nixpkgs/$channel}
       env:
         channel: '${{ matrix.channel }}'
