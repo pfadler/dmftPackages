@@ -87,6 +87,7 @@ jobs:
     - name: Run nix flake check
       run: |
         nix flake check \
+            --print-build-logs \
             --show-trace \
             --option allow-import-from-derivation false \
             --option pure-eval true \
