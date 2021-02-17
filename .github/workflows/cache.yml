@@ -96,5 +96,8 @@ jobs:
             --option allow-import-from-derivation false \
             --option pure-eval true \
             ${channel:+--override-input nixpkgs github:NixOS/nixpkgs/$channel}
+        nix flake archive --json ${channel:+--override-input nixpkgs github:NixOS/nixpkgs/$channel} |
+            jq -r '.inputs[].path' |
+            xargs nix-store --delete
       env:
         channel: '${{ matrix.channel }}'
