@@ -19,6 +19,9 @@ jobs:
         - name: nixpkgs-unstable (Linux)
           channel: nixpkgs-unstable
           os: ubuntu-latest
+        - name: nixpkgs-unstable (macOS)
+          channel: nixpkgs-unstable
+          os: macos-latest
     name: nix-build
     runs-on: ${{ matrix.os }}
     steps:
@@ -63,6 +66,9 @@ jobs:
         - name: nixpkgs-unstable (Linux)
           channel: nixpkgs-unstable
           os: ubuntu-latest
+        - name: nixpkgs-unstable (macOS)
+          channel: nixpkgs-unstable
+          os: macos-latest
     name: nix flake check
     runs-on: ${{ matrix.os }}
     steps:

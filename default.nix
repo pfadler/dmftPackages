@@ -13,8 +13,11 @@
 
 with pkgs;
 let
+  stdenvOverrides = lib.optionalAttrs stdenv.isDarwin {
+    stdenv = overrideInStdenv stdenv [ llvmPackages.openmp ];
+  };
   mpiOverride = lib.optionalAttrs (!pkgs ? mpi) { mpi = openmpi; };
-  newScope = extra: lib.callPackageWith (pkgs // mpiOverride // extra);
+  newScope = extra: lib.callPackageWith (pkgs // stdenvOverrides // mpiOverride // extra);
 in
 lib.makeScope newScope (self:
   with self; {
