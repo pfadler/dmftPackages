@@ -25,6 +25,7 @@ stdenv.mkDerivation rec {
 
   checkInputs = [ openssh ];
   doCheck = true;
+  preCheck = lib.optional stdenv.isDarwin "export TMPDIR=/tmp";
 
   meta = {
     description = "mpi is a high-level C++ interface to the Message Passing Interface";

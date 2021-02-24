@@ -26,6 +26,7 @@ stdenv.mkDerivation rec {
 
   patches = [ ./triqs.patch ./tail_issues.patch ];
   nativeBuildInputs = [ cmake gtest python3Packages.wrapPython ];
+  cmakeFlags = [ "-DCMAKE_SKIP_BUILD_RPATH=OFF" ];
   buildInputs = [
     boost
     fftw

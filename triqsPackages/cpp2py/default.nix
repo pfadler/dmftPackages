@@ -17,6 +17,7 @@ stdenv.mkDerivation rec {
     rev = version;
     sha256 = "sha256:1byl6rvb48whkwblalhiaypgccl9m9yijx8rwr9dfbffl97zcsdv";
   };
+  patches = [ ./no-auto-template-arguments.patch ];
 
   nativeBuildInputs = [ cmake python3Packages.wrapPython ];
   buildInputs = [ llvmPackages.libclang python3 ];
