@@ -16,6 +16,8 @@ recurseIntoAttrs {
 
   mpi = callPackage ./mpi { };
 
+  omegamaxent_interface = callPackage ./omegamaxent_interface { };
+
   triqs = callPackage ./triqs { };
 
   pyed = python3Packages.callPackage ./pyed { inherit triqsPackages; };

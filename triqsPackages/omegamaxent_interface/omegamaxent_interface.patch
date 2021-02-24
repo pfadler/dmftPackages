@@ -1,0 +1,19 @@
+diff --git a/deps/CMakeLists.txt b/deps/CMakeLists.txt
+index dad295f..d5bcd4d 100644
+--- a/deps/CMakeLists.txt
++++ b/deps/CMakeLists.txt
+@@ -53,7 +53,6 @@ if(PythonSupport OR Build_Documentation)
+     GIT_REPO https://github.com/TRIQS/cpp2py
+     VERSION 2.0
+     GIT_TAG master
+-    BUILD_ALWAYS
+     EXCLUDE_FROM_ALL
+   )
+ endif()
+@@ -62,6 +61,5 @@ endif()
+ external_dependency(GTest
+   GIT_REPO https://github.com/google/googletest
+   GIT_TAG release-1.10.0
+-  BUILD_ALWAYS
+   EXCLUDE_FROM_ALL
+ )
