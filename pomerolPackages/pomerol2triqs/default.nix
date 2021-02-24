@@ -23,9 +23,10 @@ stdenv.mkDerivation rec {
     inherit rev;
     sha256 = "sha256-i6h8kJzpu7u+SvefZaGZOfNrVgAjUL7h7Svndk9mBNA=";
   };
+  patches = [ ./fconcepts.patch ];
 
   nativeBuildInputs = [ cmake ];
-  cmakeFlags = [ "-DCMAKE_CXX_FLAGS=-fconcepts" ];
+  cmakeFlags = [ "-DCMAKE_SKIP_BUILD_RPATH=OFF" ];
   buildInputs = [
     mpi
     ncurses

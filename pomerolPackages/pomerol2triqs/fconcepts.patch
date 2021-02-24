@@ -1,0 +1,12 @@
+diff --git a/c++/CMakeLists.txt b/c++/CMakeLists.txt
+index 8012a04..e72e6b0 100644
+--- a/c++/CMakeLists.txt
++++ b/c++/CMakeLists.txt
+@@ -5,6 +5,7 @@ find_package(Boost COMPONENTS mpi serialization)
+ target_link_libraries(pomerol2triqs_c PUBLIC triqs  ${pomerol_LIBRARIES})
+ 
+ target_include_directories(pomerol2triqs_c PUBLIC ${pomerol_INCLUDE_DIRS})
++target_compile_options(pomerol2triqs_c PUBLIC $<$<CXX_COMPILER_ID:GNU>:-fconcepts>)
+ target_compile_options(pomerol2triqs_c PRIVATE
+   -DPOMEROL2TRIQS_GIT_HASH=${POMEROL2TRIQS_GIT_HASH}
+   -DPOMEROL2TRIQS_GIT_HASH=${POMEROL2TRIQS_GIT_HASH}
