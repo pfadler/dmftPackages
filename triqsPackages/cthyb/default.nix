@@ -22,20 +22,14 @@ stdenv.mkDerivation rec {
 
   patches = [ ./cthyb.patch ];
   nativeBuildInputs = [ cmake gtest ];
-  buildInputs = [
-    ncurses
-    nfft
-    triqsPackages.cpp2py
-    triqsPackages.itertools
-    triqsPackages.mpi
-  ];
+  buildInputs = [ ncurses nfft ];
   propagatedBuildInputs = [ triqsPackages.triqs ];
 
   checkInputs = [ openssh ];
   doCheck = true;
 
   meta = {
-    description = "Toolbox for Research on Interacting Quantum Systems";
+    description = "A fast and generic hybridization-expansion solver";
     homepage = "https://triqs.github.io/cthyb/";
     license = lib.licenses.gpl3Plus;
     maintainers = with lib.maintainers; [ hmenke ];

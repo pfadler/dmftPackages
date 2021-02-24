@@ -30,12 +30,8 @@ stdenv.mkDerivation rec {
     mpi
     ncurses
     pomerolPackages.pomerol
-    triqsPackages.cpp2py
-    triqsPackages.h5
-    triqsPackages.itertools
-    triqsPackages.mpi
-    triqsPackages.triqs
   ];
+  propagatedBuildInputs = [ triqsPackages.triqs ];
 
   OMPI_MCA_rmaps_base_oversubscribe = "yes";
   checkInputs = [ openssh ];

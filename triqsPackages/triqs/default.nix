@@ -32,12 +32,14 @@ stdenv.mkDerivation rec {
     gmp
     ncurses
     openblasCompat
-    triqsPackages.cpp2py
-    triqsPackages.itertools
-    triqsPackages.mpi
   ];
   pythonPath = with python3Packages; [ numpy matplotlib mpi4py Mako scipy ];
-  propagatedBuildInputs = [ triqsPackages.h5 ] ++ pythonPath;
+  propagatedBuildInputs = [
+    triqsPackages.cpp2py
+    triqsPackages.h5
+    triqsPackages.itertools
+    triqsPackages.mpi
+  ] ++ pythonPath;
   postFixup = "wrapPythonPrograms";
 
   UCX_LOG_FILE = "ucx.log";

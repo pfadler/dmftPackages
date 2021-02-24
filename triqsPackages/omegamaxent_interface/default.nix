@@ -23,14 +23,7 @@ stdenv.mkDerivation rec {
   patches = [ ./omegamaxent_interface.patch ];
 
   nativeBuildInputs = [ cmake gtest ];
-  buildInputs = [
-    fftw
-    gsl
-    openblasCompat
-    triqsPackages.cpp2py
-    triqsPackages.itertools
-    triqsPackages.mpi
-  ];
+  buildInputs = [ fftw gsl openblasCompat ];
   propagatedBuildInputs = [ triqsPackages.triqs ];
 
   enableParallelChecking = false;

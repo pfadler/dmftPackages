@@ -21,13 +21,7 @@ stdenv.mkDerivation rec {
 
   patches = [ ./ctint.patch ];
   nativeBuildInputs = [ cmake gtest ];
-  buildInputs = [
-    ncurses
-    nfft
-    triqsPackages.cpp2py
-    triqsPackages.itertools
-    triqsPackages.mpi
-  ];
+  buildInputs = [ ncurses nfft ];
   propagatedBuildInputs = [ triqsPackages.triqs ];
 
   UCX_LOG_FILE = "ucx.log";

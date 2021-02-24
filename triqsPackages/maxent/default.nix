@@ -19,11 +19,6 @@ stdenv.mkDerivation rec {
   };
 
   nativeBuildInputs = [ cmake python3Packages.wrapPython ];
-  buildInputs = [
-    triqsPackages.cpp2py
-    triqsPackages.itertools
-    triqsPackages.mpi
-  ];
   pythonPath =  [ python3Packages.decorator ];
   propagatedBuildInputs = pythonPath ++ [ triqsPackages.triqs ];
 
