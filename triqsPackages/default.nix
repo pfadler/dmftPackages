@@ -12,6 +12,8 @@ recurseIntoAttrs {
 
   itertools = callPackage ./itertools { };
 
+  maxent = callPackage ./maxent { };
+
   mpi = callPackage ./mpi { };
 
   triqs = callPackage ./triqs { };
