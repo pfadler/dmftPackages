@@ -17,6 +17,7 @@ stdenv.mkDerivation rec {
     rev = version;
     sha256 = "sha256:1liphapa64c16pw3dz2mqdq31jv5r01prdh1289616cvb1kp4232";
   };
+  patches = [ ./ac-check-decls.patch ];
 
   preConfigure = ''
     bash bootstrap.sh

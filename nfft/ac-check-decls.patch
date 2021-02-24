@@ -1,0 +1,17 @@
+diff --git a/configure.ac b/configure.ac
+index 2f6183f..586e313 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -486,12 +486,6 @@ AC_CHECK_FUNCS([abort snprintf sqrt])
+ AC_CHECK_FUNCS([sleep usleep nanosleep drand48 srand48])
+ AC_CHECK_FUNCS([gethostname])
+ 
+-AC_CHECK_DECLS([memalign, posix_memalign])
+-AC_CHECK_DECLS([sleep],[],[],[#include <unistd.h>])
+-AC_CHECK_DECLS([nanosleep],[],[],[#include <time.h>])
+-AC_CHECK_DECLS([drand48],[],[],[#include <stdlib.h>])
+-AC_CHECK_DECLS([srand48],[],[],[#include <stdlib.h>])
+-
+ # Cray UNICOS _rtc() (real-time clock) intrinsic
+ AC_MSG_CHECKING([for _rtc intrinsic])
+ rtc_ok=yes
