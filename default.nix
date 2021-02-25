@@ -25,6 +25,8 @@ lib.makeScope newScope (self:
 
     nfft = callPackage ./nfft { };
 
+    omegamaxent = callPackage ./omegamaxent { };
+
     pomerolPackages = callPackage ./pomerolPackages { };
 
     triqsPackages = callPackage ./triqsPackages { };
