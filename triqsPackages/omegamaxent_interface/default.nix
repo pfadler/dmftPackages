@@ -35,5 +35,6 @@ stdenv.mkDerivation rec {
     homepage = "https://triqs.github.io/omegamaxent_interface/";
     license = lib.licenses.gpl3Plus;
     maintainers = with lib.maintainers; [ hmenke ];
+    broken = stdenv.isDarwin;
   };
 }

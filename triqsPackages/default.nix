@@ -1,6 +1,6 @@
-{ recurseIntoAttrs, callPackage, triqsPackages, python3Packages }:
+{ stdenv, lib, recurseIntoAttrs, callPackage, triqsPackages, python3Packages }:
 
-recurseIntoAttrs {
+recurseIntoAttrs ({
 
   cpp2py = callPackage ./cpp2py { };
 
@@ -16,10 +16,12 @@ recurseIntoAttrs {
 
   mpi = callPackage ./mpi { };
 
-  omegamaxent_interface = callPackage ./omegamaxent_interface { };
-
   triqs = callPackage ./triqs { };
 
   pyed = python3Packages.callPackage ./pyed { inherit triqsPackages; };
 
-}
+} // lib.optionalAttrs (!stdenv.isDarwin) {
+
+  omegamaxent_interface = callPackage ./omegamaxent_interface { };
+
+})
