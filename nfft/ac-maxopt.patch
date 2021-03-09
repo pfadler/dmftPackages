@@ -1,0 +1,12 @@
+diff --git a/configure.ac b/configure.ac
+index 586e313..c27cfee 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -369,7 +369,6 @@ if test "x$ac_test_CFLAGS" != "xset"; then
+   CPPFLAGS="$CPPFLAGS $fftw3_CPPFLAGS"
+   LIBS="$LIBS $fftw3_LIBS"
+   LDFLAGS="$LDFLAGS $fftw3_LDFLAGS"
+-  AX_CC_MAXOPT
+   CPPFLAGS="$saved_CPPFLAGS"
+   LDFLAGS="$saved_LDFLAGS"
+   LIBS="$saved_LIBS"
