@@ -38,11 +38,12 @@ jobs:
         chmod 0600 ~/.ssh/id_ed25519
       env:
         SSH_KEY: '${{ secrets.SSH_KEY }}'
-    - uses: cachix/install-nix-action@v12
-    - uses: cachix/cachix-action@v8
+    - uses: cachix/install-nix-action@v13
+    - uses: cachix/cachix-action@v9
       with:
         name: hmenke
         signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
+        pushFilter: "(-source$|nixpkgs.tar.gz$)"
     - name: Run nix-build
       run: |
         rev="$(git ls-remote https://github.com/NixOS/nixpkgs refs/heads/$channel | awk '{print $1}')"
@@ -85,15 +86,16 @@ jobs:
         chmod 0600 ~/.ssh/id_ed25519
       env:
         SSH_KEY: '${{ secrets.SSH_KEY }}'
-    - uses: cachix/install-nix-action@v12
+    - uses: cachix/install-nix-action@v13
       with:
         install_url: https://github.com/numtide/nix-flakes-installer/releases/download/nix-2.4pre20201221_9fab14a/install
         extra_nix_config: |
           experimental-features = nix-command flakes
-    - uses: cachix/cachix-action@v8
+    - uses: cachix/cachix-action@v9
       with:
         name: hmenke
         signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
+        pushFilter: "(-source$|nixpkgs.tar.gz$)"
     - name: Run nix flake check
       run: |
         nix flake check \
