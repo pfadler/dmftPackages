@@ -20,6 +20,7 @@ stdenv.mkDerivation rec {
   patches = [ ./no-auto-template-arguments.patch ];
 
   nativeBuildInputs = [ cmake python3Packages.wrapPython ];
+  cmakeFlags = [ "-DLIBCLANG_CXX_FLAGS=--pipe" ]; # noop flag to work around CMake bug
   buildInputs = [ llvmPackages.libclang python3 ];
   pythonPath = with python3Packages; [ h5py Mako numpy scipy ];
   propagatedBuildInputs = pythonPath;
