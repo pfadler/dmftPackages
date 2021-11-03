@@ -88,9 +88,9 @@ jobs:
         SSH_KEY: '${{ secrets.SSH_KEY }}'
     - uses: cachix/install-nix-action@v14.1
       with:
-        install_url: https://releases.nixos.org/nix/nix-2.4pre-rc1/install
         extra_nix_config: |
           experimental-features = nix-command flakes
+          access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
     - uses: cachix/cachix-action@v10
       with:
         name: hmenke
