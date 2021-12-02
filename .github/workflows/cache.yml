@@ -19,6 +19,8 @@ jobs:
         - name: nixpkgs-unstable (Linux)
           channel: nixpkgs-unstable
           os: ubuntu-latest
+        - name: locked (macOS)
+          os: macos-latest
         - name: nixpkgs-unstable (macOS)
           channel: nixpkgs-unstable
           os: macos-latest
@@ -67,6 +69,8 @@ jobs:
         - name: nixpkgs-unstable (Linux)
           channel: nixpkgs-unstable
           os: ubuntu-latest
+        - name: locked (macOS)
+          os: macos-latest
         - name: nixpkgs-unstable (macOS)
           channel: nixpkgs-unstable
           os: macos-latest

@@ -110,8 +110,6 @@ dmftPackages.legacyPackages.x86_64-linux.triqsPackages.triqs
 
 ## Known issues / TODO
 
-  - macOS builds are experimental and currently do not work with the pinned
-    version of nixpkgs.  Users will have to follow Note 1 and pin to a recent
-    version of the nixpkgs-unstable channel.
+  - macOS builds are experimental and not really tested
 
   - Ensure that builds are reproducible
