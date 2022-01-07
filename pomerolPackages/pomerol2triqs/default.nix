@@ -27,11 +27,19 @@ stdenv.mkDerivation rec {
 
   nativeBuildInputs = [ cmake ];
   cmakeFlags = [ "-DCMAKE_SKIP_BUILD_RPATH=OFF" ];
-  buildInputs = [
-    mpi
-    ncurses
-    pomerolPackages.pomerol
-  ];
+  buildInputs =
+    let
+      boostWithMpi = boost.override {
+        useMpi = true;
+        inherit mpi;
+      };
+    in
+    [
+      boostWithMpi
+      mpi
+      ncurses
+      pomerolPackages.pomerol
+    ];
   propagatedBuildInputs = [ triqsPackages.triqs ];
 
   OMPI_MCA_rmaps_base_oversubscribe = "yes";
