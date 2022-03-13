@@ -1,0 +1,13 @@
+diff --git a/pyed/ParameterCollection.py b/pyed/ParameterCollection.py
+index 19d3efe..bc54673 100644
+--- a/pyed/ParameterCollection.py
++++ b/pyed/ParameterCollection.py
+@@ -31,7 +31,7 @@ class ParameterCollection(object):
+         return list(self.__dict__.items())
+ 
+     def keys(self):
+-   	return list(self.__dict__.keys())
++        return list(self.__dict__.keys())
+ 
+     def dict(self):
+         return self.__dict__
