@@ -16,6 +16,8 @@ recurseIntoAttrs ({
 
   mpi = callPackage ./mpi { };
 
+  nda = callPackage ./nda { };
+
   triqs = callPackage ./triqs { };
 
   pyed = python3Packages.callPackage ./pyed { inherit triqsPackages; };
