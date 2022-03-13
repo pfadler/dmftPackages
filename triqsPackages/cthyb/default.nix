@@ -11,17 +11,18 @@
 
 stdenv.mkDerivation rec {
   pname = "cthyb";
-  version = "3.0.0";
+  version = "3.1.0";
 
   src = fetchFromGitHub {
     owner = "TRIQS";
     repo = pname;
     rev = version;
-    sha256 = "sha256:1jjxlz47bxby2hhjnmgiixm9vvz56yxfmsw8ymqzs64zcx4c08pq";
+    sha256 = "sha256-NrrShRRWiBxGXf53LWwgKA2b2/GYXc/6/+cA3Xr9i/s=";
   };
 
   patches = [ ./cthyb.patch ];
   nativeBuildInputs = [ cmake gtest ];
+  cmakeFlags = [ "-DBuild_Deps=Never" ];
   buildInputs = [ ncurses nfft ];
   propagatedBuildInputs = [ triqsPackages.triqs ];
 
