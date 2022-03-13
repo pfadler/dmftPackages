@@ -1,0 +1,12 @@
+diff --git a/prog/CMakeLists.txt b/prog/CMakeLists.txt
+index 80d0d91..2ed2158 100644
+--- a/prog/CMakeLists.txt
++++ b/prog/CMakeLists.txt
+@@ -11,7 +11,6 @@
+ set(DEFAULT_PROGS
+     anderson
+     hubbard2d
+-    quantum_model
+ )
+ 
+ # Find or fetch gftools

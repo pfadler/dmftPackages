@@ -9,35 +9,33 @@
 , mpi
 , openssh
 }:
-let
-  rev = "fd312b2bc1918e0fd2f463315efe01a84a4a25ef";
-in
+
 stdenv.mkDerivation rec {
   pname = "pomerol";
-  version = "1.3+git20200410.${builtins.substring 0 7 rev}";
+  version = "2.0";
 
   src = fetchFromGitHub {
     owner = "aeantipov";
     repo = pname;
-    inherit rev;
-    sha256 = "sha256-gsm9f1XFD7i51aylEAEOpMPjQKsGkhpmSO7z4fN61To=";
+    rev = version;
+    sha256 = "sha256-RlpcPVsLuvMeECpVp92nODDij9+tciySdUCOqrqFtvA=";
   };
 
+  patches = [ ./no-quantum-model.patch ];
   nativeBuildInputs = [ cmake gtest ];
   cmakeFlags = [
     "-DTesting=ON"
     "-DProgs=ON"
-    "-DCXX11=ON"
+    "-DDocumentation=OFF"
     "-DCMAKE_SKIP_BUILD_RPATH=OFF"
   ];
-  buildInputs =
-    let
-      boostWithMpi = boost.override {
-        useMpi = true;
-        inherit mpi;
-      };
-    in
-    [ boostWithMpi eigen pomerolPackages.gftools mpi ];
+  buildInputs = [
+    boost
+    eigen
+    pomerolPackages.gftools
+    pomerolPackages.libcommute
+    mpi
+  ];
 
   OMPI_MCA_rmaps_base_oversubscribe = "yes";
   checkInputs = [ openssh ];
