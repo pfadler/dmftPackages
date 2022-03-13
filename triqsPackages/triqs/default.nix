@@ -15,18 +15,18 @@
 
 stdenv.mkDerivation rec {
   pname = "triqs";
-  version = "3.0.0";
+  version = "3.1.0";
 
   src = fetchFromGitHub {
     owner = "TRIQS";
     repo = pname;
     rev = version;
-    sha256 = "sha256:0gf5j4agslcyqrbyp9vwp88mpf2jpv0smmjh0b6jrwn54v8jpw08";
+    sha256 = "sha256-1oX84NlTVq1X3K/AwfLLAmMaktLDKeKUW/hObWuXfMs=";
   };
 
-  patches = [ ./triqs.patch ./tail_issues.patch ];
+  patches = [ ./triqs.patch ];
   nativeBuildInputs = [ cmake gtest python3Packages.wrapPython ];
-  cmakeFlags = [ "-DCMAKE_SKIP_BUILD_RPATH=OFF" ];
+  cmakeFlags = [ "-DCMAKE_SKIP_BUILD_RPATH=OFF" "-DBuild_Deps=Never" ];
   buildInputs = [
     boost
     fftw
@@ -38,6 +38,7 @@ stdenv.mkDerivation rec {
   propagatedBuildInputs = [
     triqsPackages.cpp2py
     triqsPackages.h5
+    triqsPackages.nda
     triqsPackages.itertools
     triqsPackages.mpi
   ] ++ pythonPath;
