@@ -1,0 +1,21 @@
+From f2fc97ec67d5967ecaf1db5d9d99bd2bbc08cc07 Mon Sep 17 00:00:00 2001
+From: Henri Menke <henri@henrimenke.de>
+Date: Fri, 11 Mar 2022 08:59:42 +0100
+Subject: [PATCH] add setup.py
+
+---
+ setup.py | 2 ++
+ 1 file changed, 2 insertions(+)
+ create mode 100644 setup.py
+
+diff --git a/setup.py b/setup.py
+new file mode 100644
+index 0000000..a03dd04
+--- /dev/null
++++ b/setup.py
+@@ -0,0 +1,2 @@
++from setuptools import setup
++setup(name="clang", packages=["clang"])
+-- 
+2.33.1
+

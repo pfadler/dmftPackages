@@ -3,25 +3,25 @@
 , fetchFromGitHub
 , cmake
 , python3Packages
-, llvmPackages
 , python3
 }:
 
+let
+  rev = "b268654da7a06fa526be58382b4f423b84bf5fe2";
+in
 stdenv.mkDerivation rec {
   pname = "cpp2py";
-  version = "2.0.0";
+  version = "2.0.0+git20220304.${builtins.substring 0 7 rev}";
 
   src = fetchFromGitHub {
     owner = "TRIQS";
     repo = pname;
-    rev = version;
-    sha256 = "sha256:1byl6rvb48whkwblalhiaypgccl9m9yijx8rwr9dfbffl97zcsdv";
+    inherit rev;
+    sha256 = "sha256-69UG1T+CRG3+fWGO5peJhGQrT1MYmt1Z64/7GCk2Vi8=";
   };
-  patches = [ ./no-auto-template-arguments.patch ];
 
   nativeBuildInputs = [ cmake python3Packages.wrapPython ];
-  cmakeFlags = [ "-DLIBCLANG_CXX_FLAGS=--pipe" ]; # noop flag to work around CMake bug
-  buildInputs = [ llvmPackages.libclang python3 ];
+  buildInputs = [ python3 ];
   pythonPath = with python3Packages; [ h5py Mako numpy scipy ];
   propagatedBuildInputs = pythonPath;
   postFixup = "wrapPythonPrograms";
