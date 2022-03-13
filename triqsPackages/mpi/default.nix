@@ -10,16 +10,17 @@
 
 stdenv.mkDerivation rec {
   pname = "mpi";
-  version = "1.0.0";
+  version = "1.1.0";
 
   src = fetchFromGitHub {
     owner = "TRIQS";
     repo = pname;
     rev = version;
-    sha256 = "sha256:0winhwf2qsmp4ji72bghzkd3sz2rw94li86g6h1vk5vs4485x3i5";
+    sha256 = "sha256-Bey01YCW81CcW+M/EAwHhF6sUQ2+W1fOJ7vXZIz2QWA=";
   };
 
   patches = [ ./mpi.patch ];
+  cmakeFlags = [ "-DBuild_Deps=Never" ];
   nativeBuildInputs = [ cmake gtest ];
   buildInputs = [ triqsPackages.itertools mpi ];
 
