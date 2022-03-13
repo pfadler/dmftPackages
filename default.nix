@@ -17,7 +17,8 @@ let
     stdenv = overrideInStdenv stdenv [ llvmPackages.openmp ];
   };
   mpiOverride = lib.optionalAttrs (!pkgs ? mpi) { mpi = openmpi; };
-  newScope = extra: lib.callPackageWith (pkgs // stdenvOverrides // mpiOverride // extra);
+  boostOverride = lib.optionalAttrs (lib.versionOlder boost.version "1.75.0") { boost = boost175; };
+  newScope = extra: lib.callPackageWith (pkgs // stdenvOverrides // mpiOverride // boostOverride // extra);
 in
 lib.makeScope newScope (self:
   with self; {
