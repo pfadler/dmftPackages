@@ -11,16 +11,17 @@
 
 stdenv.mkDerivation rec {
   pname = "h5";
-  version = "1.0.0";
+  version = "1.1.0";
 
   src = fetchFromGitHub {
     owner = "TRIQS";
     repo = pname;
     rev = version;
-    sha256 = "sha256:07lahznp5cbkk2nnb88lia8s9qfgrwgb6y654ql4fss574skga5w";
+    sha256 = "sha256-pqJrxsgkS+xYnEC98xBAbiw4oC72SBzS73IQBmcxjvU=";
   };
 
   patches = [ ./h5.patch ];
+  cmakeFlags = [ "-DBuild_Deps=Never" ];
   nativeBuildInputs = [ cmake gtest ];
   buildInputs = [ triqsPackages.cpp2py hdf5 ncurses ];
   propagatedBuildInputs = with python3Packages; [ numpy ];
