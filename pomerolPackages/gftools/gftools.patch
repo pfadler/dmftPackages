@@ -11,14 +11,14 @@ index 70dd84e..caea08c 100644
  //#include "tuple_tools.hpp" // only for debug
  
 diff --git a/test/CMakeLists.txt b/test/CMakeLists.txt
-index 2776f17..99c4289 100644
+index 803ddf3..a341c98 100644
 --- a/test/CMakeLists.txt
 +++ b/test/CMakeLists.txt
 @@ -26,6 +26,6 @@ grid_object_test
  foreach (test ${tests})
      set(test_src ${test}.cpp)
-     add_executable(${test} ${test_src} $<TARGET_OBJECTS:libgftools>)
--    target_link_libraries(${test} gtest_main)
-+    target_link_libraries(${test} gtest gtest_main)
+     add_executable(${test} ${test_src})
+-    target_link_libraries(${test} gtest_main gftools)
++    target_link_libraries(${test} gtest gtest_main gftools)
      add_test(${test} ${test})
  endforeach(test)
