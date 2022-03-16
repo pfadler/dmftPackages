@@ -18,6 +18,8 @@ recurseIntoAttrs ({
 
   nda = callPackage ./nda { };
 
+  tprf = callPackage ./tprf { };
+
   triqs = callPackage ./triqs { };
 
   pyed = python3Packages.callPackage ./pyed { inherit triqsPackages; };
