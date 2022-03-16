@@ -1,4 +1,4 @@
-{ recurseIntoAttrs, callPackage }:
+{ recurseIntoAttrs, callPackage, pomerolPackages, python3Packages }:
 
 recurseIntoAttrs {
 
@@ -9,5 +9,7 @@ recurseIntoAttrs {
   pomerol = callPackage ./pomerol { };
 
   pomerol2triqs = callPackage ./pomerol2triqs { };
+
+  pycommute = python3Packages.callPackage ./pycommute { inherit pomerolPackages; };
 
 }
