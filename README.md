@@ -110,6 +110,6 @@ dmftPackages.legacyPackages.x86_64-linux.triqsPackages.triqs
 
 ## Known issues / TODO
 
-  - macOS builds are experimental and not really tested
+  - macOS builds are disabled for now because there are some unresolved linking issues
 
   - Ensure that builds are reproducible
