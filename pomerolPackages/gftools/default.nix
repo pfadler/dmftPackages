@@ -8,21 +8,17 @@
 , openssh
 }:
 
-let
-  rev = "d79810dd705b8e2efa802321382ebb7658e5f452";
-in
 stdenv.mkDerivation rec {
   pname = "gftools";
-  version = "1.1.2+git20201027.${builtins.substring 0 7 rev}";
+  version = "2022.03";
 
   src = fetchFromGitHub {
     owner = "aeantipov";
     repo = pname;
-    inherit rev;
-    sha256 = "sha256-UW64iWNu+ixkCC+0agdd9l09hT1z4DlBe6DAz2fpSXI=";
+    rev = version;
+    sha256 = "sha256-miaG9vw1w+7w1+MMl1f/Yn/0B1IUt6CPWww3BeDNrLA=";
   };
 
-  patches = [ ./gftools.patch ];
   nativeBuildInputs = [ cmake gtest ];
   cmakeFlags = [ "-DTesting=ON" "-DExamples=ON" ];
   buildInputs = [ boost eigen ];
