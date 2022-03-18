@@ -10,14 +10,14 @@
 
 buildPythonPackage rec {
   pname = "pycommute";
-  version = "0.7.0";
+  version = "0.7.1";
   format = "pyproject";
 
   src = fetchFromGitHub {
     owner = "krivenko";
     repo = pname;
     rev = "v${version}";
-    sha256 = "sha256-W9llhd4pGzWSjGgSlc60aDBMIJnpyAgb8UIbs2mrBOw=";
+    sha256 = "sha256-zx3z1Gkpj7+/7JVF7TghW61ewoTZMMaKYmMwqFQ8YBE=";
   };
 
   nativeBuildInputs = [ packaging pybind11 ];
@@ -35,5 +35,6 @@ buildPythonPackage rec {
     homepage = "https://krivenko.github.io/pycommute/";
     license = lib.licenses.mpl20;
     maintainers = with lib.maintainers; [ hmenke ];
+    broken = pomerolPackages.libcommute.version != version;
   };
 }
