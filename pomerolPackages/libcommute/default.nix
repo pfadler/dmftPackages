@@ -7,13 +7,13 @@
 
 stdenv.mkDerivation rec {
   pname = "libcommute";
-  version = "0.7.0";
+  version = "0.7.1";
 
   src = fetchFromGitHub {
     owner = "krivenko";
     repo = pname;
     rev = "v${version}";
-    sha256 = "sha256-cw+PlIkDg2kIXx5B63CXujAhY8B96dcrTVX0vu0bf88=";
+    sha256 = "sha256-wpA0Rnv8ROku7ikncCby7rftFDUeNxO/AONS/0/ibLg=";
   };
 
   patches = [ ./install-targets.patch ];
