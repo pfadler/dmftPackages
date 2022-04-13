@@ -97,15 +97,10 @@ dmftPackages.legacyPackages.x86_64-linux.triqsPackages.triqs
  3. The attribute names follow the directory structure.  The attribute names are
     also case-insensitive equal to `pname`.
 
- 4. The w2dynamics program is hosted on a private repository but to compute the
-    NAR hash for downloading the prebuilt binaries you need the source code, so
-    unless you have access to the source you can neither download binaries nor
-    build it yourself.
-
- 5. All packages that have checks have their checks run when building to ensure
+ 4. All packages that have checks have their checks run when building to ensure
     the correctness of the resulting binaries.
 
- 6. There is also an overlay in case you want to install these packages in your
+ 5. There is also an overlay in case you want to install these packages in your
     local or global environment, e.g. on NixOS.
 
 ## Known issues / TODO

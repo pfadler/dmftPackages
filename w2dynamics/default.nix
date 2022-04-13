@@ -1,5 +1,6 @@
 { stdenv
 , lib
+, fetchFromGitHub
 , cmake
 , gfortran
 , openblasCompat
@@ -8,19 +9,17 @@
 , python3
 , python3Packages
 }:
-let
-  rev = "521f0f40ea7a0cfbef0faa82a4b7a6e030db1f9c";
-in
+
 stdenv.mkDerivation rec {
   pname = "w2dynamics";
-  version = "1.0+git20210120.${builtins.substring 0 7 rev}";
+  version = "1.1.2";
 
-  src = builtins.fetchGit {
-    url = "git+ssh://git@git.physik.uni-wuerzburg.de/w2dynamics/w2dynamics.git";
-    inherit rev;
+  src = fetchFromGitHub {
+    owner = "w2dynamics";
+    repo = pname;
+    rev = "v${version}";
+    sha256 = "sha256-i6pjGHE3k9uNiwWQPVqoDDrqTJ4zRtGhZcVKCDEPabc=";
   };
-
-  patches = [ ./0001-Use-ISO-format-for-HDF5-timestamps.patch ];
 
   nativeBuildInputs = [ cmake python3Packages.wrapPython ];
 
