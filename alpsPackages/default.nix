@@ -6,6 +6,8 @@ recurseIntoAttrs {
 
   ct-hyb = callPackage ./ct-hyb { };
 
+  ct-hyb-segment = callPackage ./ct-hyb-segment { };
+
   maxent = callPackage ./maxent { };
 
 }
