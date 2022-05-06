@@ -7,20 +7,19 @@
 , pytestCheckHook
 }:
 let
-  rev = "e2952c250f1505df54c39d150db4be9e44b3e012";
+  rev = "6359be4f287bddd67db3a50960880de6b645f008";
 in
 buildPythonPackage rec {
   pname = "pyed";
-  version = "1.0+git20220208.${builtins.substring 0 7 rev}";
+  version = "1.0+git20220317.${builtins.substring 0 7 rev}";
 
   src = fetchFromGitHub {
     owner = "HugoStrand";
     repo = pname;
     inherit rev;
-    sha256 = "sha256-smQ7IdHTH02ZJMbvtE0clqy23eGyw0OdFRUVPfWm9yQ=";
+    sha256 = "sha256-/jHUbN6oEfSYRjJf8ap1xF4a5Vz27lNLaqM/RV8G4Sg=";
   };
 
-  patches = [ ./fix-tab-error.patch ];
   propagatedBuildInputs = [ numpy scipy triqsPackages.triqs ];
 
   checkInputs = [ pytestCheckHook ];
