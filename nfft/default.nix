@@ -27,7 +27,7 @@ stdenv.mkDerivation rec {
   '';
   nativeBuildInputs = [ autoconf automake libtool ];
   configureFlags = [ "--enable-all" "--enable-openmp" ];
-  buildInputs = [ fftw ];
+  propagatedBuildInputs = [ fftw ];
 
   doCheck = true;
 
