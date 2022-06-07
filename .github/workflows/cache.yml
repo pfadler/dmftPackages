@@ -13,8 +13,8 @@ jobs:
         include:
         - name: locked (Linux)
           os: ubuntu-latest
-        - name: nixos-21.11 (Linux)
-          channel: nixos-21.11
+        - name: nixos-22.05 (Linux)
+          channel: nixos-22.05
           os: ubuntu-latest
         - name: nixpkgs-unstable (Linux)
           channel: nixpkgs-unstable
@@ -58,8 +58,8 @@ jobs:
         include:
         - name: locked (Linux)
           os: ubuntu-latest
-        - name: nixos-21.11 (Linux)
-          channel: nixos-21.11
+        - name: nixos-22.05 (Linux)
+          channel: nixos-22.05
           os: ubuntu-latest
         - name: nixpkgs-unstable (Linux)
           channel: nixpkgs-unstable
