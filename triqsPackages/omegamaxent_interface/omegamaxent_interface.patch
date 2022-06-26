@@ -17,3 +17,16 @@ index 8281e7f..061abcd 100644
 -  BUILD_ALWAYS
    EXCLUDE_FROM_ALL
  )
+diff --git a/python/OmegaMaxEnt_TRIQS.py b/python/OmegaMaxEnt_TRIQS.py
+index 67733b3..acd6808 100644
+--- a/python/OmegaMaxEnt_TRIQS.py
++++ b/python/OmegaMaxEnt_TRIQS.py
+@@ -29,7 +29,7 @@ from triqs.gf import *
+ from h5 import HDFArchive as HA
+ import os
+ from os import path
+-from collections import Iterable
++from collections.abc import Iterable
+ 
+ tol_Gi_tau = 1e-8
+ 
