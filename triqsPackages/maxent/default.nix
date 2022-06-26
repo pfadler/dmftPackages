@@ -9,13 +9,13 @@
 
 stdenv.mkDerivation rec {
   pname = "maxent";
-  version = "1.1.0";
+  version = "1.1.1";
 
   src = fetchFromGitHub {
     owner = "TRIQS";
     repo = pname;
     rev = version;
-    sha256 = "sha256-uK6LDygmMKGIpY8AIhaCD/+y+QiKdHIKz20j7s58vC0=";
+    sha256 = "sha256-To/4TMZ4mbiS3UjfZkbGqABT1q4MR/oUdW54Hmk6THU=";
   };
 
   nativeBuildInputs = [ cmake python3Packages.wrapPython ];
