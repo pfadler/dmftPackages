@@ -15,13 +15,13 @@
 
 stdenv.mkDerivation rec {
   pname = "triqs";
-  version = "3.1.0";
+  version = "3.1.1";
 
   src = fetchFromGitHub {
     owner = "TRIQS";
     repo = pname;
     rev = version;
-    sha256 = "sha256-1oX84NlTVq1X3K/AwfLLAmMaktLDKeKUW/hObWuXfMs=";
+    sha256 = "sha256-Wp/x6ecX8t56ap1qogbFZ/jjSp6MRrmdyVrFLXqaG8I=";
   };
 
   patches = [ ./triqs.patch ];
