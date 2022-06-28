@@ -7,7 +7,7 @@
     {
       overlays.default = import ./overlay.nix;
     } //
-    flake-utils.lib.eachDefaultSystem (system:
+    flake-utils.lib.eachSystem [ "i686-linux" "x86_64-linux" ] (system:
       let
         dmftPackages = import ./. { pkgs = nixpkgs.legacyPackages.${system}; };
       in
