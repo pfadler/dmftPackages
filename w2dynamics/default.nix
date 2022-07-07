@@ -12,13 +12,13 @@
 
 stdenv.mkDerivation rec {
   pname = "w2dynamics";
-  version = "1.1.2";
+  version = "1.1.3";
 
   src = fetchFromGitHub {
     owner = "w2dynamics";
     repo = pname;
     rev = "v${version}";
-    sha256 = "sha256-i6pjGHE3k9uNiwWQPVqoDDrqTJ4zRtGhZcVKCDEPabc=";
+    sha256 = "sha256-4py4xBVD6kN8D/If+bXn+4OjwI1n6m1M1puZbA3fBbE=";
   };
 
   nativeBuildInputs = [ cmake python3Packages.wrapPython ];
