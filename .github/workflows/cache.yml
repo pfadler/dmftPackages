@@ -22,19 +22,9 @@ jobs:
     name: nix-build
     runs-on: ${{ matrix.os }}
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
       with:
         fetch-depth: 0
-    - name: "Setup SSH key"
-      run: |
-        mkdir -p -m 0700 ~/.ssh
-        echo "StrictHostKeyChecking no" >> ~/.ssh/config
-        echo "IdentityFile ~/.ssh/id_ed25519" >> ~/.ssh/config
-        echo "UserKnownHostsFile /dev/null" >> ~/.ssh/config
-        printenv SSH_KEY >> ~/.ssh/id_ed25519
-        chmod 0600 ~/.ssh/id_ed25519
-      env:
-        SSH_KEY: '${{ secrets.SSH_KEY }}'
     - uses: cachix/install-nix-action@v17
     - uses: cachix/cachix-action@v10
       with:
@@ -67,19 +57,9 @@ jobs:
     name: nix flake check
     runs-on: ${{ matrix.os }}
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
       with:
         fetch-depth: 0
-    - name: "Setup SSH key"
-      run: |
-        mkdir -p -m 0700 ~/.ssh
-        echo "StrictHostKeyChecking no" >> ~/.ssh/config
-        echo "IdentityFile ~/.ssh/id_ed25519" >> ~/.ssh/config
-        echo "UserKnownHostsFile /dev/null" >> ~/.ssh/config
-        printenv SSH_KEY >> ~/.ssh/id_ed25519
-        chmod 0600 ~/.ssh/id_ed25519
-      env:
-        SSH_KEY: '${{ secrets.SSH_KEY }}'
     - uses: cachix/install-nix-action@v17
       with:
         extra_nix_config: |
