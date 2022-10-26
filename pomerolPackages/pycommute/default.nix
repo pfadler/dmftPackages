@@ -4,6 +4,7 @@
 , pomerolPackages
 , packaging
 , pybind11
+, setuptools
 , numpy
 , pytestCheckHook
 }:
@@ -20,7 +21,7 @@ buildPythonPackage rec {
     sha256 = "sha256-zx3z1Gkpj7+/7JVF7TghW61ewoTZMMaKYmMwqFQ8YBE=";
   };
 
-  nativeBuildInputs = [ packaging pybind11 ];
+  nativeBuildInputs = [ packaging pybind11 setuptools ];
   buildInputs = [ pomerolPackages.libcommute ];
   propagatedBuildInputs = [ numpy ];
 
