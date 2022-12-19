@@ -15,5 +15,6 @@
         packages = flake-utils.lib.flattenTree dmftPackages;
         legacyPackages = dmftPackages;
         checks = self.packages.${system};
+        formatter = nixpkgs.legacyPackages.${system}.nixpkgs-fmt;
       });
 }
