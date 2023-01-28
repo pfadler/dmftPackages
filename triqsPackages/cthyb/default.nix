@@ -11,13 +11,13 @@
 
 stdenv.mkDerivation rec {
   pname = "cthyb";
-  version = "3.1.0";
+  version = "3.1.1";
 
   src = fetchFromGitHub {
     owner = "TRIQS";
     repo = pname;
     rev = version;
-    sha256 = "sha256-NrrShRRWiBxGXf53LWwgKA2b2/GYXc/6/+cA3Xr9i/s=";
+    sha256 = "sha256-FQpWAzW0DHmZGzLb6j/OSmm2Df9/WabRiqFAk8T8quQ=";
   };
 
   patches = [ ./cthyb.patch ];
