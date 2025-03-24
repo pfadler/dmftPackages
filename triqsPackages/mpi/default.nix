@@ -10,13 +10,13 @@
 
 stdenv.mkDerivation rec {
   pname = "mpi";
-  version = "1.1.0";
+  version = "1.3.0";
 
   src = fetchFromGitHub {
     owner = "TRIQS";
     repo = pname;
     rev = version;
-    sha256 = "sha256-Bey01YCW81CcW+M/EAwHhF6sUQ2+W1fOJ7vXZIz2QWA=";
+    sha256 = "sha256-reH6h2StseJyj76zNNtAP/hiekJKsCJ/m9KJCN2IRxw=";
   };
 
   patches = [ ./mpi.patch ];
