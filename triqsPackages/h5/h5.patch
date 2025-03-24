@@ -1,11 +1,11 @@
 diff --git a/deps/CMakeLists.txt b/deps/CMakeLists.txt
-index 8281e7f..061abcd 100644
+index 4993b0e..32021db 100644
 --- a/deps/CMakeLists.txt
 +++ b/deps/CMakeLists.txt
-@@ -53,7 +53,6 @@ if(PythonSupport OR Build_Documentation)
+@@ -53,7 +53,6 @@ if(PythonSupport)
      GIT_REPO https://github.com/TRIQS/cpp2py
      VERSION 2.0
-     GIT_TAG master
+     GIT_TAG unstable
 -    BUILD_ALWAYS
      EXCLUDE_FROM_ALL
    )
@@ -18,7 +18,7 @@ index 8281e7f..061abcd 100644
    EXCLUDE_FROM_ALL
  )
 diff --git a/python/h5/CMakeLists.txt b/python/h5/CMakeLists.txt
-index 03fc209..bb7fdc5 100644
+index 01f0028..e22e900 100644
 --- a/python/h5/CMakeLists.txt
 +++ b/python/h5/CMakeLists.txt
 @@ -10,6 +10,7 @@ foreach(file ${python_sources})
@@ -26,11 +26,11 @@ index 03fc209..bb7fdc5 100644
  
  # Install python files to proper location
 +set(PYTHON_LIB_DEST_ROOT ${CPP2PY_PYTHON_LIB_DEST_ROOT})
- set(PYTHON_LIB_DEST ${PYTHON_LIB_DEST_ROOT}/${PROJECT_NAME})
+ set(PYTHON_LIB_DEST ${CPP2PY_PYTHON_LIB_DEST_ROOT}/${PROJECT_NAME})
  install(FILES ${CMAKE_CURRENT_BINARY_DIR}/version.py DESTINATION ${PYTHON_LIB_DEST})
- install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} DESTINATION ${PYTHON_LIB_DEST_ROOT} FILES_MATCHING PATTERN "*.py" PATTERN "*_desc.py" EXCLUDE)
+ install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} DESTINATION ${CPP2PY_PYTHON_LIB_DEST_ROOT} FILES_MATCHING PATTERN "*.py" PATTERN "*_desc.py" EXCLUDE)
 diff --git a/test/c++/CMakeLists.txt b/test/c++/CMakeLists.txt
-index 59fca85..868a229 100644
+index 59fca85..c50f2b4 100644
 --- a/test/c++/CMakeLists.txt
 +++ b/test/c++/CMakeLists.txt
 @@ -11,7 +11,7 @@ foreach(test ${all_tests})
@@ -38,19 +38,7 @@ index 59fca85..868a229 100644
    get_filename_component(test_dir ${test} DIRECTORY)
    add_executable(${test_name} ${test})
 -  target_link_libraries(${test_name} ${PROJECT_NAME}::${PROJECT_NAME}_c ${PROJECT_NAME}_warnings gtest_main h5::hdf5)
-+  target_link_libraries(${test_name} ${PROJECT_NAME}::${PROJECT_NAME}_c ${PROJECT_NAME}_warnings gtest gtest_main h5::hdf5)
++  target_link_libraries(${test_name} ${PROJECT_NAME}::${PROJECT_NAME}_c ${PROJECT_NAME}_warnings gtest h5::hdf5)
    set_property(TARGET ${test_name} PROPERTY RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/${test_dir})
    add_test(NAME ${test_name} COMMAND ${test_name} WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/${test_dir})
    # Run clang-tidy if found
-diff --git a/test/python/CMakeLists.txt b/test/python/CMakeLists.txt
-index 619724b..c8f2599 100644
---- a/test/python/CMakeLists.txt
-+++ b/test/python/CMakeLists.txt
-@@ -15,6 +15,6 @@ target_include_directories(storable PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
- foreach(test ${all_tests})
-   get_filename_component(test_name ${test} NAME_WE)
-   get_filename_component(test_dir ${test} DIRECTORY)
--  add_test(NAME Py_${test_name} COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/${test_dir}/${test_name}.py WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/${test_dir})
-+  add_test(NAME Py_${test_name} COMMAND ${CPP2PY_PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/${test_dir}/${test_name}.py WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/${test_dir})
-   set_property(TEST Py_${test_name} APPEND PROPERTY ENVIRONMENT PYTHONPATH=${PROJECT_BINARY_DIR}/python:${CMAKE_CURRENT_BINARY_DIR}:$ENV{PYTHONPATH} ${SANITIZER_RT_PRELOAD})
- endforeach()
