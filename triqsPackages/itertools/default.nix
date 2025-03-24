@@ -7,13 +7,13 @@
 
 stdenv.mkDerivation rec {
   pname = "itertools";
-  version = "1.1.0";
+  version = "1.3.0";
 
   src = fetchFromGitHub {
     owner = "TRIQS";
     repo = pname;
     rev = version;
-    sha256 = "sha256-01PXIrypIQZo1X3UHKjVyZ230AS8LfGhvJunD/A3ttQ=";
+    sha256 = "sha256-MK5tHFP61BK3vmFNpSyxU7PCHXg+wv7gEkWBNAxUoaQ=";
   };
 
   patches = [ ./itertools.patch ];

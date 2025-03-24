@@ -2,22 +2,14 @@ diff --git a/deps/CMakeLists.txt b/deps/CMakeLists.txt
 index a661f8f..a96c8f7 100644
 --- a/deps/CMakeLists.txt
 +++ b/deps/CMakeLists.txt
-@@ -53,7 +53,6 @@ if(Build_Documentation)
-     GIT_REPO https://github.com/TRIQS/cpp2py
-     VERSION 2.0
-     GIT_TAG master
--    BUILD_ALWAYS
-     EXCLUDE_FROM_ALL
-   )
- endif()
-@@ -62,7 +61,6 @@ endif()
+@@ -51,6 +51,5 @@
  external_dependency(GTest
    GIT_REPO https://github.com/google/googletest
    GIT_TAG main
 -  BUILD_ALWAYS
    EXCLUDE_FROM_ALL
- )
- 
+ ) 
+
 diff --git a/test/c++/CMakeLists.txt b/test/c++/CMakeLists.txt
 index 14ac6ae..8968087 100644
 --- a/test/c++/CMakeLists.txt

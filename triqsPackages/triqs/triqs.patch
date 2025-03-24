@@ -1,63 +1,11 @@
-diff --git a/c++/triqs/triqs++.in b/c++/triqs/triqs++.in
-index c7a78f2..7080f8b 100644
---- a/c++/triqs/triqs++.in
-+++ b/c++/triqs/triqs++.in
-@@ -1,4 +1,4 @@
--#!@PYTHON_EXECUTABLE@
-+#!@CPP2PY_PYTHON_EXECUTABLE@
- 
- cxxflags = "@CMAKE_CXXFLAGS@ @triqs_CXXFLAGS@ @python_and_numpy_CXXFLAGS@"
- ldflags = "@triqs_LDFLAGS@ @python_and_numpy_LDFLAGS@ -L@CMAKE_INSTALL_PREFIX@/lib -ltriqs -lcpp2py"
-diff --git a/cmake/FindTest.cmake b/cmake/FindTest.cmake
-index c80b84c..fb5232e 100644
---- a/cmake/FindTest.cmake
-+++ b/cmake/FindTest.cmake
-@@ -51,11 +51,11 @@ function(add_python_test)
-   endif()
- 
-   foreach(NP ${ARG_MPI_NUMPROC})
--    add_test(${testname}_np${NP} ${MPIEXEC_EXECUTABLE} ${MPIEXEC_NUMPROC_FLAG} ${ARG_MPI_NUMPROC} ${MPIEXEC_PREFLAGS} ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/${testfile})
-+    add_test(${testname}_np${NP} ${MPIEXEC_EXECUTABLE} ${MPIEXEC_NUMPROC_FLAG} ${ARG_MPI_NUMPROC} ${MPIEXEC_PREFLAGS} ${CPP2PY_PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/${testfile})
-     set_property(TEST ${testname}_np${NP} PROPERTY ENVIRONMENT ${testenv})
-   endforeach()
- 
--  add_test(${testname} ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/${testfile})
-+  add_test(${testname} ${CPP2PY_PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/${testfile})
-   set_property(TEST ${testname} PROPERTY ENVIRONMENT ${testenv})
- 
- endfunction(add_python_test)
-diff --git a/cmake/FindTriqsTest.cmake.in b/cmake/FindTriqsTest.cmake.in
-index 5107df9..487e469 100644
---- a/cmake/FindTriqsTest.cmake.in
-+++ b/cmake/FindTriqsTest.cmake.in
-@@ -1,4 +1,4 @@
--set(PYTHON_EXECUTABLE @PYTHON_EXECUTABLE@)
-+set(PYTHON_EXECUTABLE @CPP2PY_PYTHON_EXECUTABLE@)
- 
- # runs a c++ test
- # if there is a .ref file a comparison test is done
 diff --git a/deps/CMakeLists.txt b/deps/CMakeLists.txt
 index cb56367..187f209 100644
 --- a/deps/CMakeLists.txt
 +++ b/deps/CMakeLists.txt
-@@ -64,7 +64,6 @@ endif()
+@@ -64,6 +64,5 @@ endif()
  external_dependency(GTest
    GIT_REPO https://github.com/google/googletest
    GIT_TAG main
 -  BUILD_ALWAYS
    EXCLUDE_FROM_ALL
  )
- 
-diff --git a/test/python/base/CMakeLists.txt b/test/python/base/CMakeLists.txt
-index cb9ecbf..ddd49e3 100644
---- a/test/python/base/CMakeLists.txt
-+++ b/test/python/base/CMakeLists.txt
-@@ -4,7 +4,7 @@ file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/${all_h5_files} DESTINATION ${CMAKE_CURREN
- 
- # test if MPI detection works on system
- set(testenv PYTHONPATH=${CMAKE_BINARY_DIR}/python:${CPP2PY_MODULE_DIR}:${CPP2PY_BINARY_DIR}:${h5_MODULE_DIR}:${h5_BINARY_DIR}/python:./:$ENV{PYTHONPATH})
--add_test(NAME py_check_mpi_env COMMAND ${MPIEXEC_EXECUTABLE} ${MPIEXEC_NUMPROC_FLAG} 1 ${MPIEXEC_PREFLAGS} ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/check_mpi_env.py)
-+add_test(NAME py_check_mpi_env COMMAND ${MPIEXEC_EXECUTABLE} ${MPIEXEC_NUMPROC_FLAG} 1 ${MPIEXEC_PREFLAGS} ${CPP2PY_PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/check_mpi_env.py)
- set_property(TEST py_check_mpi_env PROPERTY ENVIRONMENT ${testenv})
- 
- 
