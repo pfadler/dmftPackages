@@ -1,5 +1,5 @@
 diff --git a/deps/CMakeLists.txt b/deps/CMakeLists.txt
-index ca0b79a..e888d57 100644
+index dd0faf8..41dac29 100644
 --- a/deps/CMakeLists.txt
 +++ b/deps/CMakeLists.txt
 @@ -51,7 +51,6 @@ endif()
@@ -9,4 +9,18 @@ index ca0b79a..e888d57 100644
 -  BUILD_ALWAYS
    EXCLUDE_FROM_ALL
  )
+ 
+diff --git a/test/c++/CMakeLists.txt b/test/c++/CMakeLists.txt
+index be60f50..ccbd850 100644
+--- a/test/c++/CMakeLists.txt
++++ b/test/c++/CMakeLists.txt
+@@ -25,7 +25,7 @@ foreach(test ${all_tests})
+   get_filename_component(test_name ${test} NAME_WE)
+   get_filename_component(test_dir ${test} DIRECTORY)
+   add_executable(${test_name} ${test})
+-  target_link_libraries(${test_name} ${PROJECT_NAME}::${PROJECT_NAME}_c openmp ${PROJECT_NAME}_warnings gtest_main)
++  target_link_libraries(${test_name} ${PROJECT_NAME}::${PROJECT_NAME}_c openmp ${PROJECT_NAME}_warnings gtest)
+   set_property(TARGET ${test_name} PROPERTY RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/${test_dir})
+   set(test_bin ${CMAKE_CURRENT_BINARY_DIR}/${test_dir}/${test_name})
+   add_test(NAME ${test_name}_np2 COMMAND ${MPIEXEC_EXECUTABLE} ${MPIEXEC_NUMPROC_FLAG} 2 ${MPIEXEC_PREFLAGS} ${test_bin} ${MPIEXEC_POSTFLAGS} WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/${test_dir})
  
