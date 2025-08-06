@@ -16,6 +16,8 @@ recurseIntoAttrs ({
 
   nda = callPackage ./nda { };
 
+  cppdlr = callPackage ./cppdlr { };
+
   tprf = callPackage ./tprf { };
 
   triqs = callPackage ./triqs { };
