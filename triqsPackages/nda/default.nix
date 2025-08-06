@@ -12,13 +12,13 @@
 
 stdenv.mkDerivation rec {
   pname = "nda";
-  version = "1.1.0";
+  version = "1.3.0";
 
   src = fetchFromGitHub {
     owner = "TRIQS";
     repo = pname;
     rev = version;
-    sha256 = "sha256-gsJ7nqNLSnH7BrGrPGp50tgFx+iGPR4cyAAK/ZQ0H8E=";
+    sha256 = "sha256-fsNWkxu3cvoOXDVNJkjBaGMlValPvYsGLbb3cNAXmZk=";
   };
 
   patches = [ ./nda.patch ];
