@@ -7,23 +7,24 @@
 , triqsPackages
 , ncurses
 , openssh
+, boost
 }:
 
 stdenv.mkDerivation rec {
   pname = "tprf";
-  version = "3.1.1";
+  version = "3.3.1";
 
   src = fetchFromGitHub {
     owner = "TRIQS";
     repo = pname;
     rev = version;
-    sha256 = "sha256-zgSX1sliQ6QYNx/D1WZ6cRuYHN/UJYnQfOVi3WDda4k=";
+    sha256 = "sha256-0cgf5O4junHmMOljzi8xVx/BkLHOCzK36nK8oOy1NC0=";
   };
 
   patches = [ ./tprf.patch ];
   nativeBuildInputs = [ cmake gtest ];
   cmakeFlags = [ "-DBuild_Deps=Never" ];
-  buildInputs = [ ncurses ];
+  buildInputs = [ ncurses boost ];
   propagatedBuildInputs = [ triqsPackages.triqs ];
 
   checkInputs = [ openssh ];
