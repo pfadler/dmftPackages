@@ -1,3 +1,16 @@
+diff --git a/cmake/TRIQSConfig.cmake.in b/cmake/TRIQSConfig.cmake.in
+index 2eb8b521..a0abc33d 100644
+--- a/cmake/TRIQSConfig.cmake.in
++++ b/cmake/TRIQSConfig.cmake.in
+@@ -80,7 +80,7 @@ add_library(triqs_py INTERFACE)
+ target_link_libraries(triqs_py INTERFACE nda::nda_py)
+ 
+ # Include the exported targets of this project
+-include(@CMAKE_INSTALL_PREFIX@/@FMT_CMAKE_DIR@/fmt-targets.cmake)
++include(@fmt_DIR@/fmt-targets.cmake)
+ include(@CMAKE_INSTALL_FULL_LIBDIR@/cmake/triqs/triqs-targets.cmake)
+ 
+ message(STATUS "Found TRIQSConfig.cmake with version @PROJECT_VERSION@, hash = @TRIQS_GIT_HASH@, root = @CMAKE_INSTALL_PREFIX@")
 diff --git a/deps/CMakeLists.txt b/deps/CMakeLists.txt
 index f1ef146d..1e9cad94 100644
 --- a/deps/CMakeLists.txt
