@@ -5,20 +5,22 @@
 , triqsPackages
 , python3Packages
 , openssh
+, boost
 }:
 
 stdenv.mkDerivation rec {
   pname = "maxent";
-  version = "1.1.1";
+  version = "3.3.0";
 
   src = fetchFromGitHub {
     owner = "TRIQS";
     repo = pname;
     rev = version;
-    sha256 = "sha256-To/4TMZ4mbiS3UjfZkbGqABT1q4MR/oUdW54Hmk6THU=";
+    sha256 = "sha256-mnUYLV55D6A+ojBZt+83xK7qOQQ4Rsr+4TJwUFvoERk=";
   };
 
   nativeBuildInputs = [ cmake python3Packages.wrapPython ];
+  buildInputs = [ boost ];
   pythonPath = [ python3Packages.decorator ];
   propagatedBuildInputs = pythonPath ++ [ triqsPackages.triqs ];
 
