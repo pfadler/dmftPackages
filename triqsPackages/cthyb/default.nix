@@ -7,23 +7,24 @@
 , ncurses
 , nfft
 , openssh
+, boost
 }:
 
 stdenv.mkDerivation rec {
   pname = "cthyb";
-  version = "3.1.1";
+  version = "3.3.0";
 
   src = fetchFromGitHub {
     owner = "TRIQS";
     repo = pname;
     rev = version;
-    sha256 = "sha256-FQpWAzW0DHmZGzLb6j/OSmm2Df9/WabRiqFAk8T8quQ=";
+    sha256 = "sha256-bZfjK08MsW/ZK6c2STi+pJAZjR/uJbV4UnMa6/hBzQA=";
   };
 
   patches = [ ./cthyb.patch ];
   nativeBuildInputs = [ cmake gtest ];
   cmakeFlags = [ "-DBuild_Deps=Never" ];
-  buildInputs = [ ncurses nfft ];
+  buildInputs = [ ncurses nfft boost ];
   propagatedBuildInputs = [ triqsPackages.triqs ];
 
   checkInputs = [ openssh ];
