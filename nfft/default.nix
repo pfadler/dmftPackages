@@ -9,13 +9,13 @@
 
 stdenv.mkDerivation rec {
   pname = "nfft";
-  version = "3.5.2";
+  version = "3.5.3";
 
   src = fetchFromGitHub {
     owner = "NFFT";
     repo = pname;
     rev = version;
-    sha256 = "sha256:1liphapa64c16pw3dz2mqdq31jv5r01prdh1289616cvb1kp4232";
+    sha256 = "sha256-HR8ME9PVC+RAv1GIgV2vK6eLU8Wk28+rSzbutThBv3w=";
   };
   patches = [
     ./ac-check-decls.patch
