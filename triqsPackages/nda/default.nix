@@ -22,7 +22,7 @@ stdenv.mkDerivation rec {
   };
 
   patches = [ ./nda.patch ];
-  cmakeFlags = [ "-DBuild_Deps=Never" ];
+  cmakeFlags = [ "-DBuild_Deps=Never" "-DPythonSupport=ON" ];
   nativeBuildInputs = [ cmake gtest ];
   buildInputs = [
     triqsPackages.cpp2py
@@ -32,7 +32,7 @@ stdenv.mkDerivation rec {
     openblasCompat
     ncurses
   ];
-  propagatedBuildInputs = with python3Packages; [ numpy ];
+  propagatedBuildInputs = with python3Packages; [ numpy mako scipy ];
 
   checkInputs = [ openssh ];
   doCheck = true;
