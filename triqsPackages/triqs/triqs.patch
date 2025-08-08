@@ -1,11 +1,31 @@
 diff --git a/deps/CMakeLists.txt b/deps/CMakeLists.txt
-index cb56367..187f209 100644
+index f1ef146d..1e9cad94 100644
 --- a/deps/CMakeLists.txt
 +++ b/deps/CMakeLists.txt
-@@ -64,6 +64,5 @@ endif()
+@@ -64,7 +64,6 @@ endif()
  external_dependency(GTest
    GIT_REPO https://github.com/google/googletest
    GIT_TAG main
 -  BUILD_ALWAYS
    EXCLUDE_FROM_ALL
  )
+ 
+@@ -74,18 +73,15 @@ if(Build_Benchs)
+   external_dependency(google-bench
+     GIT_REPO https://github.com/google/benchmark
+     GIT_TAG main
+-    BUILD_ALWAYS
+     EXCLUDE_FROM_ALL
+   )
+ endif()
+ 
+ # -- fmt --
+-set(FMT_INSTALL ON)
+ external_dependency(fmt
+   GIT_REPO https://github.com/fmtlib/fmt
+   GIT_TAG 10.2.1
+ )
+-target_compile_options(fmt PRIVATE $<$<CXX_COMPILER_ID:IntelLLVM>:-Wno-tautological-constant-compare>)
+ 
+ # -- itertools --
+ external_dependency(itertools
