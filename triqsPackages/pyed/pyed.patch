@@ -1,0 +1,13 @@
+diff --git a/pyed/tests/test_operator_utils.py b/pyed/tests/test_operator_utils.py
+index dc1f654..b8e1a65 100644
+--- a/pyed/tests/test_operator_utils.py
++++ b/pyed/tests/test_operator_utils.py
+@@ -13,7 +13,7 @@ import numpy as np
+ 
+ from triqs.operators import n, c, c_dag, Operator, dagger
+ 
+-from triqs.operators.util.U_matrix import U_matrix_kanamori, U_matrix
++from triqs.operators.util.U_matrix import U_matrix_kanamori
+ from triqs.operators.util.hamiltonians import h_int_kanamori
+ 
+ from transform_kanamori import h_int_kanamori_transformed
