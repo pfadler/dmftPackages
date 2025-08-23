@@ -8,6 +8,7 @@
 , ncurses
 , openssh
 , boost
+, gmp
 }:
 
 stdenv.mkDerivation rec {
@@ -24,7 +25,7 @@ stdenv.mkDerivation rec {
   patches = [ ./tprf.patch ];
   nativeBuildInputs = [ cmake gtest ];
   cmakeFlags = [ "-DBuild_Deps=Never" ];
-  buildInputs = [ ncurses boost ];
+  buildInputs = [ ncurses boost gmp ];
   propagatedBuildInputs = [ triqsPackages.triqs ];
 
   checkInputs = [ openssh ];
