@@ -35,10 +35,6 @@ stdenv.mkDerivation rec {
   nativeBuildInputs = [ gcc13 cmake gtest fmt python3Packages.wrapPython triqsPackages.itertools ];
   cmakeFlags = [ "-DCMAKE_SKIP_BUILD_RPATH=OFF" "-DBuild_Deps=Never" ];
   buildInputs = [
-    boost
-    fftw
-    gmp
-    ncurses
     openblasCompat
     git
     hdf5
@@ -46,6 +42,9 @@ stdenv.mkDerivation rec {
   ];
   pythonPath = with python3Packages; [ numpy matplotlib mpi4py Mako scipy ];
   propagatedBuildInputs = [
+    boost
+    fftw
+    gmp
     triqsPackages.cpp2py
     triqsPackages.h5
     triqsPackages.nda

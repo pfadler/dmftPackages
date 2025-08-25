@@ -5,10 +5,7 @@
 , cmake
 , gtest
 , triqsPackages
-, ncurses
 , openssh
-, boost
-, gmp
 }:
 
 stdenv.mkDerivation rec {
@@ -25,7 +22,9 @@ stdenv.mkDerivation rec {
   patches = [ ./tprf.patch ];
   nativeBuildInputs = [ cmake gtest ];
   cmakeFlags = [ "-DBuild_Deps=Never" ];
-  buildInputs = [ ncurses boost gmp ];
+  # Documentation specifies 'a working triqs installation,
+  # such that we moved the buildinputs were moved to triqs propagatedBuildInputs'
+  buildInputs = [  ];
   propagatedBuildInputs = [ triqsPackages.triqs ];
 
   checkInputs = [ openssh ];
