@@ -37,11 +37,11 @@ stdenv.mkDerivation rec {
   buildInputs = [
     openblasCompat
     git
-    hdf5
     fmt
   ];
   pythonPath = with python3Packages; [ numpy matplotlib mpi4py Mako scipy ];
   propagatedBuildInputs = [
+    hdf5
     boost
     fftw
     gmp
