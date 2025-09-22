@@ -20,7 +20,7 @@ stdenv.mkDerivation rec {
     owner = "flatironinstitute";
     repo = pname;
     rev = version;
-    sha256 = "sha256-6ZyaIAgg5Ik3IodWVZavclm1LwGLqlYPIplHjZUd8eI=";
+    sha256 = "sha256-PxZtJifJotQtON+bEVGelXl/G9jxxfV5WmD6UJlhtLU=";
   };
 
   patches = [ ./cppdlr.patch ];
