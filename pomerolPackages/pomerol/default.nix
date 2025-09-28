@@ -13,27 +13,19 @@
 
 stdenv.mkDerivation rec {
   pname = "pomerol";
-  version = "2.0";
+  version = "2.2";
 
   src = fetchFromGitHub {
-    owner = "aeantipov";
+    owner = "pomerol-ed";
     repo = pname;
     rev = version;
-    sha256 = "sha256-RlpcPVsLuvMeECpVp92nODDij9+tciySdUCOqrqFtvA=";
+    sha256 = "sha256-s65GSNZcV2virhc6WquhhdNs7YojendQSDHQycSsi7I=";
   };
 
-  patches = [
-    (fetchpatch {
-      name = "fix-quantum_model-is-not-a-valid-prog.patch";
-      url = "https://github.com/aeantipov/pomerol/commit/a7dee04938584c05dd827becd906e4a1483f5b53.patch";
-      sha256 = "sha256-/QEzacrSnSsxeyjAHVH0N3bJFxQf2TgfGl88MqBctQ0=";
-    })
-    (fetchpatch {
-      name = "CI-Update-value-of-libcommute_DIR-CMake-var-after-kr.patch";
-      url = "https://github.com/aeantipov/pomerol/commit/6de692ba27109972b279085f6c2bf6bbad2fc986.patch";
-      sha256 = "sha256-iI+E8oFuasFf5KIc/TvyisOarSY5nEb1/o9QfLGGexM=";
-    })
-  ];
+  # The tests will fail, if it is impossible to spawn 16 mpi processes
+  # this patch will limit it to a reasonable 4
+  patches = [ ./mpitest.patch ];
+
   nativeBuildInputs = [ cmake gtest ];
   cmakeFlags = [
     "-DTesting=ON"
@@ -55,7 +47,7 @@ stdenv.mkDerivation rec {
 
   meta = {
     description = "Exact diagonalization code for solving condensed matter second-quantized models of interacting fermions on finite size lattices at finite temperatures";
-    homepage = "https://aeantipov.github.io/pomerol/";
+    homepage = "https://github.com/pomerol-ed/pomerol";
     license = lib.licenses.gpl2Only;
     maintainers = with lib.maintainers; [ hmenke ];
   };
