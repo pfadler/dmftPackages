@@ -11,13 +11,13 @@
 
 stdenv.mkDerivation rec {
   pname = "pomerol2triqs";
-  version = "0.7";
+  version = "0.10";
 
   src = fetchFromGitHub {
-    owner = "krivenko";
+    owner = "pomerol-ed";
     repo = pname;
     rev = "v${version}";
-    sha256 = "sha256-na/jDQkbSaT36VXu02Xg1y8DvUeKH2gf46frkvW16iU=";
+    sha256 = "sha256-MQOzvqIwE0nMnfDyiUaXiNuOif4ksqBefMAgJE4y8qo=";
   };
 
   nativeBuildInputs = [ cmake ];
@@ -31,7 +31,7 @@ stdenv.mkDerivation rec {
 
   meta = {
     description = "Quick and dirty TRIQS wrapper around the Pomerol exact diagonalization library";
-    homepage = "https://github.com/krivenko/pomerol2triqs";
+    homepage = "https://github.com/pomerol-ed/pomerol2triqs";
     license = lib.licenses.gpl3Only;
     maintainers = with lib.maintainers; [ hmenke ];
   };
