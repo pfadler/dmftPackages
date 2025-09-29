@@ -24,6 +24,8 @@ lib.makeScope newScope (self:
   with self; {
     alpsPackages = callPackage ./alpsPackages { };
 
+    nessi = callPackage ./nessi { };
+
     nfft = callPackage ./nfft { };
 
     omegamaxent = callPackage ./omegamaxent { };
