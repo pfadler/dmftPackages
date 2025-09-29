@@ -10,13 +10,13 @@
 
 stdenv.mkDerivation rec {
   pname = "CT-HYB";
-  version = "1.0.3";
+  version = "1.0.4";
 
   src = fetchFromGitHub {
     owner = "ALPSCore";
     repo = pname;
     rev = "v${version}";
-    sha256 = "sha256-9WM7ki99YwuaWydKklTpNFD1SEh8j8LOZ0hZ1gkplO4=";
+    sha256 = "sha256-hciV8gfCQwQE2k+7FGnUnUV3cO4jeCvOaeeKXymwAqU=";
   };
 
   nativeBuildInputs = [ cmake ];
