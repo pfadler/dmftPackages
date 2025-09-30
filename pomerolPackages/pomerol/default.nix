@@ -22,10 +22,6 @@ stdenv.mkDerivation rec {
     sha256 = "sha256-s65GSNZcV2virhc6WquhhdNs7YojendQSDHQycSsi7I=";
   };
 
-  # The tests will fail, if it is impossible to spawn 16 mpi processes
-  # this patch will limit it to a reasonable 4
-  patches = [ ./mpitest.patch ];
-
   nativeBuildInputs = [ cmake gtest ];
   cmakeFlags = [
     "-DTesting=ON"
@@ -41,7 +37,7 @@ stdenv.mkDerivation rec {
     mpi
   ];
 
-  OMPI_MCA_rmaps_base_oversubscribe = "yes";
+  PRTE_MCA_rmaps_default_mapping_policy=":oversubscribe";
   checkInputs = [ openssh ];
   doCheck = true;
 
