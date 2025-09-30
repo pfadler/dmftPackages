@@ -1,8 +1,6 @@
 { stdenv
 , lib
 , fetchFromGitHub
-, fetchpatch
-, gcc13
 , cmake
 , gtest
 , fmt
@@ -11,10 +9,8 @@
 , triqsPackages
 , fftw
 , gmp
-, ncurses
 , openblasCompat
 , openssh
-, git
 , hdf5
 }:
 
@@ -32,11 +28,10 @@ stdenv.mkDerivation rec {
   patches = [
     ./triqs.patch
   ];
-  nativeBuildInputs = [ gcc13 cmake gtest fmt python3Packages.wrapPython triqsPackages.itertools ];
+  nativeBuildInputs = [ cmake gtest python3Packages.wrapPython ];
   cmakeFlags = [ "-DCMAKE_SKIP_BUILD_RPATH=OFF" "-DBuild_Deps=Never" ];
   buildInputs = [
     openblasCompat
-    git
     fmt
   ];
   pythonPath = with python3Packages; [ numpy matplotlib mpi4py Mako scipy ];
