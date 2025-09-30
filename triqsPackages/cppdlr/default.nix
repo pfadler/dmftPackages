@@ -9,7 +9,6 @@
 , openblasCompat
 , hdf5
 , mpi
-, git
 }:
 
 stdenv.mkDerivation rec {
@@ -25,7 +24,7 @@ stdenv.mkDerivation rec {
 
   patches = [ ./cppdlr.patch ];
   cmakeFlags = [ "-DBuild_Deps=Never" ];
-  nativeBuildInputs = [ cmake gtest git ];
+  nativeBuildInputs = [ cmake gtest ];
   buildInputs = [
     hdf5
     mpi
@@ -34,12 +33,11 @@ stdenv.mkDerivation rec {
   ];
 
   propagatedBuildInputs = [
-    triqsPackages.cpp2py
     triqsPackages.h5
     triqsPackages.nda
-    triqsPackages.itertools
-    triqsPackages.mpi
   ];
+
+  doCheck = true;
 
   meta = {
     description = "Discrete Lehmann representation of imaginary time Green's functions";

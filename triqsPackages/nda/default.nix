@@ -25,14 +25,18 @@ stdenv.mkDerivation rec {
   cmakeFlags = [ "-DBuild_Deps=Never" "-DPythonSupport=ON" ];
   nativeBuildInputs = [ cmake gtest ];
   buildInputs = [
-    triqsPackages.cpp2py
-    triqsPackages.itertools
     triqsPackages.h5
-    triqsPackages.mpi
     openblasCompat
     ncurses
   ];
-  propagatedBuildInputs = with python3Packages; [ numpy mako scipy ];
+  propagatedBuildInputs = [
+    python3Packages.numpy
+    python3Packages.mako
+    python3Packages.scipy
+    triqsPackages.itertools
+    triqsPackages.cpp2py
+    triqsPackages.mpi
+  ];
 
   checkInputs = [ openssh ];
   doCheck = true;
