@@ -1,12 +1,10 @@
 { stdenv
 , lib
 , fetchFromGitHub
-, fetchpatch
 , cmake
 , gfortran
 , openblasCompat
 , fftw
-, fftwFloat
 , nfft
 , python3
 , python3Packages
@@ -23,13 +21,15 @@ stdenv.mkDerivation rec {
     sha256 = "sha256-sBLSui+FFn5js+Ri6kcXcOEv5J/3Z0cXrhGlHdLFLnA=";
   };
 
+  patches = [ ./remove_fftwf.patch ];
+
   nativeBuildInputs = [ cmake python3Packages.wrapPython ];
 
   cmakeFlags = [ "-DUSE_NFFT=1" ];
 
   enableParallelBuilding = false;
 
-  buildInputs = [ gfortran openblasCompat fftw fftwFloat nfft ];
+  buildInputs = [ gfortran openblasCompat fftw nfft ];
 
   pythonPath = with python3Packages; [ numpy scipy h5py mpi4py configobj ];
   propagatedBuildInputs = pythonPath;

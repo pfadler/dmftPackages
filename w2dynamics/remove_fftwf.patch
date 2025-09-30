@@ -1,0 +1,13 @@
+diff --git a/cmake/Modules/FindFFTW.cmake b/cmake/Modules/FindFFTW.cmake
+index 4c4520a..c45e9eb 100644
+--- a/cmake/Modules/FindFFTW.cmake
++++ b/cmake/Modules/FindFFTW.cmake
+@@ -104,7 +104,7 @@ else()
+ 
+ endif( FFTW_ROOT )
+ 
+-set(FFTW_LIBRARIES ${FFTW_LIB} ${FFTWF_LIB})
++set(FFTW_LIBRARIES ${FFTW_LIB})
+ 
+ if(FFTWL_LIB)
+   set(FFTW_LIBRARIES ${FFTW_LIBRARIES} ${FFTWL_LIB})
