@@ -45,6 +45,6 @@ stdenv.mkDerivation rec {
     description = "Discrete Lehmann representation of imaginary time Green's functions";
     homepage = "https://github.com/flatironinstitute/cppdlr";
     license = lib.licenses.asl20;
-    maintainers = with lib.maintainers; [ hmenke ];
+    maintainers = with lib.maintainers; [ pfadler ];
   };
 }
