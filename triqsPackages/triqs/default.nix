@@ -36,10 +36,6 @@ stdenv.mkDerivation rec {
   ];
   pythonPath = with python3Packages; [ numpy matplotlib mpi4py Mako scipy ];
   propagatedBuildInputs = [
-    hdf5
-    boost
-    fftw
-    gmp
     triqsPackages.cpp2py
     triqsPackages.h5
     triqsPackages.nda
