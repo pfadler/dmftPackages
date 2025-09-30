@@ -5,7 +5,6 @@
 , triqsPackages
 , python3Packages
 , openssh
-, boost
 }:
 
 stdenv.mkDerivation rec {
@@ -20,7 +19,6 @@ stdenv.mkDerivation rec {
   };
 
   nativeBuildInputs = [ cmake python3Packages.wrapPython ];
-  buildInputs = [ boost ];
   pythonPath = [ python3Packages.decorator ];
   propagatedBuildInputs = pythonPath ++ [ triqsPackages.triqs ];
 
