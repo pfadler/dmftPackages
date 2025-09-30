@@ -33,6 +33,10 @@ stdenv.mkDerivation rec {
   buildInputs = [
     openblasCompat
     fmt
+    hdf5
+    boost
+    fftw
+    gmp
   ];
   pythonPath = with python3Packages; [ numpy matplotlib mpi4py Mako scipy ];
   propagatedBuildInputs = [
