@@ -27,7 +27,7 @@ stdenv.mkDerivation rec {
   cmakeFlags = [ "-DBuild_Deps=Never" ];
   nativeBuildInputs = [ cmake gtest ];
   buildInputs = [ triqsPackages.cpp2py hdf5 ncurses ];
-  propagatedBuildInputs = with python3Packages; [ numpy scipy mako];
+  propagatedBuildInputs = with python3Packages; [ numpy ];
 
   doCheck = true;
 
