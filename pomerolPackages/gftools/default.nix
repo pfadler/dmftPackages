@@ -19,11 +19,12 @@ stdenv.mkDerivation rec {
     sha256 = "sha256-miaG9vw1w+7w1+MMl1f/Yn/0B1IUt6CPWww3BeDNrLA=";
   };
 
+  patches = [ ./useCpp14.patch ];
   nativeBuildInputs = [ cmake gtest ];
-  cmakeFlags = [ "-DTesting=OFF" "-DExamples=ON" ];
+  cmakeFlags = [ "-DTesting=ON" "-DExamples=ON" ];
   buildInputs = [ boost eigen ];
 
-  doCheck = false;
+  doCheck = true;
 
   meta = {
     description = "gftools is a set of tools to work with numerical condmat problems";
